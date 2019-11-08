@@ -1,0 +1,322 @@
+html {
+    height: 100%;
+}
+
+body {
+    background-color: rgb(102, 100, 100);
+    padding: 0;
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+h1 {
+    font-size: 2em;
+    color: white;
+    font-family: 'BebasNeueRegular';
+    font-style: normal;
+}
+
+h3 {
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+}
+
+p {
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.float {
+    float: right;
+}
+
+.active {
+    background-color: rgb(102, 100, 100);
+}
+
+.navbar .active:hover {
+    background-color: rgb(102, 100, 100);
+}
+
+.navbar {
+    overflow: hidden;
+    background-color: rgb(92, 145, 139);
+}
+
+.navbar a {
+    float: left;
+    font-size: 16px;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.navbar a:hover {
+    background-color: rgb(76, 122, 117);
+}
+
+.dropdown {
+    float: left;
+    overflow: hidden;
+}
+
+.navbar input[type=text] {
+    float: right;
+    padding: 7px;
+    border: none;
+    margin-top: 9px;
+    margin-right: 16px;
+    font-size: 12px;
+    border-radius: 15px;
+}
+
+.dropdown .dropbtn {
+    font-size: 16px;
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: rgb(76, 122, 117);
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 150px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+#redflags {
+    font-family: Arial, sans-serif;
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+#redflags tr:last-of-type {
+    border-bottom: 2px solid rgb(92, 145, 139);
+}
+
+#redflags td,
+#redflags th {
+    border: 1px solid #ddd;
+    padding: 5px;
+}
+
+img {
+    height: 20px;
+    width: 70px;
+}
+
+#redflags tr {
+    background-color: white;
+}
+
+#redflags tr:hover {
+    background-color: #ddd;
+}
+
+#redflags th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: rgb(92, 145, 139);
+    color: white;
+    /*font-family: 'Montserrat', sans-serif;*/
+}
+
+hr {
+    width: 400px;
+    border-top: 1px solid #f8f8f8;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.btn1 {
+    background-color: rgb(245, 182, 66);
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.btn2 {
+    background-color: rgb(247, 84, 59);
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.btn3 {
+    background-color: rgb(68, 146, 235);
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.btn1:hover {
+    background-color: rgb(245, 162, 10);
+    color: white;
+}
+
+.btn2:hover {
+    background-color: rgb(222, 74, 69);
+    color: white;
+}
+
+.btn3:hover {
+    background-color: rgb(34, 91, 156);
+    color: white;
+}
+
+.active:hover {
+    background-color: rgb(102, 100, 100);
+}
+
+.badge1 {
+    position: relative;
+}
+
+.badge1[data-badge]:after {
+    content: attr(data-badge);
+    position: absolute;
+    top: -10px;
+    right: -17px;
+    font-size: .8em;
+    background: green;
+    color: white;
+    width: 18px;
+    height: 18px;
+    text-align: center;
+    line-height: 18px;
+    border-radius: 50%;
+    box-shadow: 0 0 1px #333;
+}
+
+.badge2 {
+    position: relative;
+}
+
+.badge2[data-badge]:after {
+    content: attr(data-badge);
+    position: absolute;
+    top: -10px;
+    right: -17px;
+    font-size: .8em;
+    background: red;
+    color: white;
+    width: 18px;
+    height: 18px;
+    text-align: center;
+    line-height: 18px;
+    border-radius: 50%;
+    box-shadow: 0 0 1px #333;
+}
+
+.badge3 {
+    position: relative;
+}
+
+.badge3[data-badge]:after {
+    content: attr(data-badge);
+    position: absolute;
+    top: -10px;
+    right: -17px;
+    font-size: .8em;
+    background: rgb(242, 176, 94);
+    color: white;
+    width: 18px;
+    height: 18px;
+    text-align: center;
+    line-height: 18px;
+    border-radius: 50%;
+    box-shadow: 0 0 1px #333;
+}
+
+.badge4 {
+    position: relative;
+}
+
+.badge4[data-badge]:after {
+    content: attr(data-badge);
+    position: absolute;
+    top: -10px;
+    right: -17px;
+    font-size: .8em;
+    background: rgb(66, 165, 168);
+    color: white;
+    width: 18px;
+    height: 18px;
+    text-align: center;
+    line-height: 18px;
+    border-radius: 50%;
+    box-shadow: 0 0 1px #333;
+}
+
+#badge {
+    text-decoration: none;
+    color: white;
+    cursor: text;
+}
+
+#badge:hover {
+    background-color: rgb(102, 100, 100);
+    color: white;
+}
+
+span {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+#icon1 {
+    color: orange;
+}
+
+#icon2 {
+    color: red;
+}
+
+#icon3 {
+    color: rgb(94, 151, 242);
+}
+
+.scroll {
+    overflow-x: auto;
+}
