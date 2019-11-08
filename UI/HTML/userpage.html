@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>User Page</title>
+    <link rel="stylesheet" type="text/css" href="../CSS/userpage.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/bebas" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="navbar">
+        <a href="../HTML/userpage.html" class="active">Home</a>
+        <a href="#news">USER'S PROFILE</a>
+        <div class="float">
+            <div class="dropdown">
+                <button class="dropbtn">Other
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content">
+                    <a href="../HTML/other.html">Red-Flags/Interventions</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="dropbtn">New
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content">
+                    <a href="../HTML/new.html">Red Flag/Intervention</a>
+                </div>
+            </div>
+            <a href="../index.html">LogOut</a>
+            <input type="text" placeholder="Search..">
+        </div>
+    </div>
+    <br>
+    <br>
+    <h1 align="center">Redflags/Interventions</h1>
+    <hr>
+    <br>
+    <div align="center">
+        <h3><b>NOTIFICATIONS</b></h3>
+        <a href="#" class="badge1" data-badge="1" id="badge">Resolved</a>
+        <span></span>
+        <a href="#" class="badge2" data-badge="1" id="badge">Rejected</a>
+        <span></span>
+        <a href="#" class="badge3" data-badge="2" id="badge">Under Investigation</a>
+        <span></span>
+        <a href="#" class="badge4" data-badge="1" id="badge">Draft</a>
+        <span></span>
+        <br>
+        <br>
+        <h3><b>LIST OF ALL RED-FLAGS/INTERVENTIONS</b></h3>
+    </div>
+    <div class="scroll">
+        <table id="redflags">
+            <tr>
+                <th>CreatedOn</th>
+                <th>Title</th>
+                <th>Type</th>
+                <th>Comment</th>
+                <th>Location(Long and Lat)</th>
+                <th>Status</th>
+                <th>Image link</th>
+                <th>Video link</th>
+                <th>Action</th>
+            </tr>
+            <tr>
+                <td>20th-Oct-2019</td>
+                <td>Corruption</td>
+                <td>Red-flag</td>
+                <td>I saw corruption</td>
+                <td>-1.970579, 30.104429</td>
+                <td class="under">Pending...</td>
+                <td><img
+                        src="https://image.shutterstock.com/image-photo/concept-corruption-finance-profit-bail-260nw-724106536.jpg">
+                </td>
+                <td>no video</td>
+                <td>
+                    <a href="../HTML/edit.html"><i class='far fa-edit' id="icon1"></i></a>
+                    <span></span>
+                    <a href=""><i class='far fa-trash-alt' id="icon2"></i></a>
+                    <span></span>
+                </td>
+            </tr>
+            <tr>
+                <td>1st-Oct-2019</td>
+                <td>Stealing</td>
+                <td>Intervention</td>
+                <td>no comment</td>
+                <td>-1.504430, 29.635160</td>
+                <td class="under">Draft</td>
+                <td>no image</td>
+                <td>no video</td>
+                <td>
+                    <a href="../HTML/edit.html"><i class='far fa-edit' id="icon1"></i></a>
+                    <span></span>
+                    <a href=""><i class='far fa-trash-alt' id="icon2"></i></a>
+                    <span></span>
+                </td>
+            </tr>
+            <tr>
+                <td>20th-Jan-2019</td>
+                <td>Loss of identification card</td>
+                <td>Red-flag</td>
+                <td>Call this number +250785802789</td>
+                <td>-1.966400, 30.077100</td>
+                <td class="success">Rejected</td>
+                <td>no image</td>
+                <td>no video</td>
+                <td>
+                    <a href="../HTML/edit.html"><i class='far fa-edit' id="icon1"></i></a>
+                    <span></span>
+                    <a href=""><i class='far fa-trash-alt' id="icon2"></i></a>
+                    <span></span>
+                </td>
+            </tr>
+            <tr>
+                <td>4th-Oct-2019</td>
+                <td>Rape</td>
+                <td>Intervention</td>
+                <td>rape in Gisenyi</td>
+                <td>-1.703030, 29.260441</td>
+                <td class="rejected">Resolved</td>
+                <td>no image</td>
+                <td>no video</td>
+                <td>
+                    <a href="../HTML/edit.html"><i class='far fa-edit' id="icon1"></i></a>
+                    <span></span>
+                    <a href=""><i class='far fa-trash-alt' id="icon2"></i></a>
+                    <span></span>
+                </td>
+            </tr>
+            <tr>
+                <td>5th-Nov-2019</td>
+                <td>Corruption</td>
+                <td>Red-flag</td>
+                <td>I saw corruption</td>
+                <td>-1.970579, 30.104429</td>
+                <td class="draft">Draft</td>
+                <td>no image</td>
+                <td>no video</td>
+                <td>
+                    <a href="../HTML/edit.html"><i class='far fa-edit' id="icon1"></i></a>
+                    <span></span>
+                    <a href=""><i class='far fa-trash-alt' id="icon2"></i></a>
+                    <span></span>
+                </td>
+            </tr>
+            <tr>
+                <td>10th-Mar-2019</td>
+                <td>Murder</td>
+                <td>Intervention</td>
+                <td>no comment</td>
+                <td>-2.581550, 29.713760</td>
+                <td class="under">Under investigation</td>
+                <td>no image</td>
+                <td>no video</td>
+                <td>
+                    <a href="../HTML/edit.html"><i class='far fa-edit' id="icon1"></i></a>
+                    <span></span>
+                    <a href=""><i class='far fa-trash-alt' id="icon2"></i></a>
+                    <span></span>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>

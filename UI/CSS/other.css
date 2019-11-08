@@ -1,0 +1,157 @@
+html {
+    height: 100%;
+}
+
+body {
+    background-color: rgb(102, 100, 100);
+    padding: 0;
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+h1 {
+    font-size: 2em;
+    color: white;
+    font-family: 'BebasNeueRegular';
+    font-style: normal;
+}
+
+.navbar input[type=text] {
+    float: right;
+    padding: 7px;
+    border: none;
+    margin-top: 9px;
+    margin-right: 16px;
+    font-size: 12px;
+    border-radius: 15px;
+}
+
+.float {
+    float: right;
+}
+
+.active {
+    background-color: rgb(102, 100, 100);
+}
+
+.navbar {
+    overflow: hidden;
+    background-color: rgb(92, 145, 139);
+}
+
+.navbar a {
+    float: left;
+    font-size: 16px;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.dropdown {
+    float: left;
+    overflow: hidden;
+}
+
+#redflags tr:last-of-type {
+    border-bottom: 2px solid rgb(92, 145, 139);
+}
+
+.dropdown .dropbtn {
+    font-size: 16px;
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 150px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.scroll {
+    overflow-x: auto;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+#redflags {
+    font-family: Arial, sans-serif;
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+#redflags td,
+#redflags th {
+    border: 1px solid #ddd;
+    padding: 5px;
+}
+
+#redflags tr {
+    background-color: white;
+}
+
+#redflags tr:hover {
+    background-color: #ddd;
+}
+
+#redflags th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: rgb(92, 145, 139);
+    color: white;
+}
+
+hr {
+    width: 400px;
+    border-top: 1px solid #f8f8f8;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.btn3 {
+    background-color: rgb(68, 146, 235);
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.btn3:hover {
+    background-color: rgb(34, 91, 156);
+    color: white;
+}
+
+a:hover {
+    background-color: rgb(76, 122, 117);
+}
+
+.active:hover {
+    background-color: rgb(102, 100, 100);
+}
