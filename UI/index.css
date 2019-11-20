@@ -61,6 +61,7 @@ h3 {
     border-radius: 30px;
     cursor: pointer;
     font-size: 20px;
+    outline: none;
 }
 
 .button:hover {
@@ -118,13 +119,13 @@ i {
 .modal-content {
     background-color: rgba(255, 255, 255);
     color: white;
-    left: 320px;
     top: 150px;
     padding: 0;
-    margin: 0;
+    margin-left: auto;
+    margin-right: auto;
     padding: 20px;
-    width: 50%;
-    height: 60%;
+    width: 550px;
+    height: 400px;
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.17);
     animation-name: modalopen;
     animation-duration: 1s;
@@ -162,13 +163,13 @@ i {
 .modal-content1 {
     background-color: rgba(255, 255, 255);
     color: white;
-    left: 320px;
     top: 70px;
+    margin-left: auto;
+    margin-right: auto;
     padding: 0;
-    margin: 0;
     padding: 20px;
-    width: 50%;
-    height: 80%;
+    width: 500px;
+    height: 570px;
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.17);
     animation-name: modalopen;
     animation-duration: 1s;
@@ -206,13 +207,13 @@ i {
 .modal-content2 {
     background-color: rgba(255, 255, 255);
     color: white;
-    left: 320px;
+    margin-left: auto;
+    margin-right: auto;
     top: 150px;
     padding: 0;
-    margin: 0;
     padding: 20px;
-    width: 50%;
-    height: 60%;
+    width: 500px;
+    height: 400px;
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.17);
     animation-name: modalopen;
     animation-duration: 1s;
@@ -250,13 +251,13 @@ i {
 .modal-content3 {
     background-color: rgba(255, 255, 255);
     color: white;
-    left: 320px;
-    top: 150px;
+    top: 130px;
+    margin-left: auto;
+    margin-right: auto;
     padding: 0;
-    margin: 0;
     padding: 20px;
-    width: 50%;
-    height: 60%;
+    width: 600px;
+    height: 400px;
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.17);
     animation-name: modalopen;
     animation-duration: 1s;
