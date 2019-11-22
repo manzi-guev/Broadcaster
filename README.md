@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/manzi-guev/Broadcaster.svg?branch=develop)](https://travis-ci.org/manzi-guev/Broadcaster)
+[![Coverage Status](https://coveralls.io/repos/github/manzi-guev/Broadcaster/badge.svg?branch=develop)](https://coveralls.io/github/manzi-guev/Broadcaster?branch=develop)
+
 # Broadcaster
 
 > What are we building?
