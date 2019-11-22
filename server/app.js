@@ -1,9 +1,11 @@
 /* eslint-disable node/no-unsupported-features/es-syntax */
 import express from 'express';
 import bodyParser from 'body-parser';
+import dotenv from 'dotenv';
 import routes from './routes/routes';
 
 const app = express();
+dotenv.config();
 
 app.use(bodyParser.json());
 app.use(
@@ -19,7 +21,7 @@ app.get('/', (req, res) => {
   });
 });
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT;
 app.listen(port, () => {
   console.log(`Broadcaster server is running on port ${port}`);
 });
