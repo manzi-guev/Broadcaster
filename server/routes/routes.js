@@ -5,6 +5,7 @@ import { signUp, signIn, createRedflag } from '../middlewares/validation.middlew
 import userController from '../controllers/userController';
 import redflagController from '../controllers/redflagController';
 import token from '../middlewares/token.middleware';
+import owner from '../middlewares/owner';
 
 const route = express();
 route.post('/api/v1/auth/signup', signUp, userController.signup);
@@ -12,5 +13,6 @@ route.post('/api/v1/auth/signin', signIn, userController.signin);
 route.post('/api/v1/red-flags', token, createRedflag, redflagController.create);
 route.get('/api/v1/red-flags', redflagController.viewredflags);
 route.get('/api/v1/red-flags/:id', redflagController.viewSpecificflag);
+route.delete('/api/v1/red-flags/:id', token, owner, redflagController.delete);
 
 export default route;

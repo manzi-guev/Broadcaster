@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /* eslint-disable node/no-unsupported-features/es-syntax */
 import moment from 'moment';
 import redflags from '../models/redflags';
@@ -54,6 +55,19 @@ class redflagController {
       status: 404,
       error: 'Redflag not found'
     });
+  }
+
+  static delete(req, res) {
+    const id = parseInt(req.params.id, 10);
+    const foundRedflagIndex = redflags.find(flag => flag.id === id);
+    /* istanbul ignore else */
+    if (foundRedflagIndex) {
+      redflags.splice(redflags.indexOf(foundRedflagIndex), 1);
+      return res.status(200).json({
+        status: 200,
+        message: 'Redflag successfully deleted'
+      });
+    }
   }
 }
 
