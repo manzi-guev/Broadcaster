@@ -69,6 +69,23 @@ class redflagController {
       });
     }
   }
+
+  static editLocation(req, res) {
+    const id = parseInt(req.params.id, 10);
+    const redflag = redflags.find(flag => flag.id === id);
+    /* istanbul ignore else */
+    if (redflag) {
+      redflag.location = req.body.location;
+      return res.status(200).json({
+        status: 200,
+        message: 'Updated red-flag location',
+        data: {
+          id: redflag.id,
+          location: redflag.location
+        }
+      });
+    }
+  }
 }
 
 export default redflagController;

@@ -8,6 +8,7 @@ chai.use(http);
 chai.should();
 
 const realtoken = gentoken('abdoul@gmail.com');
+const faketoken = gentoken('manzi@gmail.com');
 
 const user = {
   firstname: 'Nuru',
@@ -17,8 +18,20 @@ const user = {
   username: 'gege',
   password: 'nurureal'
 };
+const user2 = {
+  firstname: 'Nuru',
+  lastname: 'Abdou',
+  email: 'manzi@gmail.com',
+  phonenumber: '+250785802789',
+  username: 'gege',
+  password: 'nurureal'
+};
 const login = {
   email: 'abdoul@gmail.com',
+  password: 'nurureal'
+};
+const login2 = {
+  email: 'manzi@gmail.com',
   password: 'nurureal'
 };
 const usercatch = {
@@ -51,6 +64,12 @@ const redflagempty = {
   images: 'no images',
   videos: 'no videos'
 };
+const updatelocation = {
+  location: 'USA'
+};
+const emptylocation = {
+  location: ''
+};
 
 describe('User tests', () => {
   it('Not authorized', done => {
@@ -77,7 +96,18 @@ describe('User tests', () => {
         done();
       });
   });
-
+  it('Another User should be able to create an account', done => {
+    chai
+      .request(app)
+      .post('/api/v1/auth/signup')
+      .send(user2)
+      .end((err, res) => {
+        res.should.have.status(201);
+        res.body.should.have.property('message', 'User succesfully created');
+        res.body.should.have.property('token');
+        done();
+      });
+  });
   it('Cannot create account if User already exists', done => {
     chai
       .request(app)
@@ -94,6 +124,17 @@ describe('User tests', () => {
       .request(app)
       .post('/api/v1/auth/signin')
       .send(login)
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.should.have.property('message', 'User successfully logged in');
+        done();
+      });
+  });
+  it('Another User must be able to login', done => {
+    chai
+      .request(app)
+      .post('/api/v1/auth/signin')
+      .send(login2)
       .end((err, res) => {
         res.should.have.status(200);
         res.body.should.have.property('message', 'User successfully logged in');
@@ -229,6 +270,18 @@ describe('RedFlag Tests', () => {
         done();
       });
   });
+  it('Not Owner message', done => {
+    const id = 1;
+    chai
+      .request(app)
+      .delete(`/api/v1/red-flags/${id}`)
+      .set('token', faketoken)
+      .end((err, res) => {
+        res.should.have.status(403);
+        res.body.should.have.property('error', 'You are not the owner');
+        done();
+      });
+  });
   it('Viewing specific redflag', done => {
     const id = 1;
     chai
@@ -237,6 +290,35 @@ describe('RedFlag Tests', () => {
       .send()
       .end((err, res) => {
         res.should.have.status(200);
+        done();
+      });
+  });
+  it('Updating the location of a redflag', done => {
+    const id = 1;
+    chai
+      .request(app)
+      .patch(`/api/v1/red-flags/${id}/location`)
+      .set('token', realtoken)
+      .send(updatelocation)
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.should.have.property('message', 'Updated red-flag location');
+        done();
+      });
+  });
+  it('Updating the location of a redflag with empty field', done => {
+    const id = 1;
+    chai
+      .request(app)
+      .patch(`/api/v1/red-flags/${id}/location`)
+      .set('token', realtoken)
+      .send(emptylocation)
+      .end((err, res) => {
+        res.should.have.status(400);
+        res.body.should.have.property(
+          'error',
+          '"location" is not allowed to be empty'
+        );
         done();
       });
   });
