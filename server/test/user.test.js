@@ -240,6 +240,34 @@ describe('RedFlag Tests', () => {
         done();
       });
   });
+  it('Deleting a redflag', done => {
+    const id = 1;
+    chai
+      .request(app)
+      .delete(`/api/v1/red-flags/${id}`)
+      .set('token', realtoken)
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.should.have.property(
+          'message',
+          'Redflag successfully deleted'
+        );
+        done();
+      });
+  });
+  it('Deleting a redflag that doesnt exist', done => {
+    const id = 2;
+    chai
+      .request(app)
+      .delete(`/api/v1/red-flags/${id}`)
+      .set('token', realtoken)
+      .send()
+      .end((err, res) => {
+        res.should.have.status(404);
+        res.body.should.have.property('error', 'Redflag not found');
+        done();
+      });
+  });
 });
 describe('Token Test', () => {
   it('No token found', done => {
