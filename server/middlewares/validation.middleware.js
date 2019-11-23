@@ -111,4 +111,19 @@ const editlocation = (req, res, next) => {
   }
   next();
 };
-export { signUp, signIn, createRedflag, editlocation };
+const editcomment = (req, res, next) => {
+  const schema = {
+    comment: Joi.string()
+      .trim()
+      .required()
+  };
+  const output = Joi.validate(req.body, schema);
+  if (output.error != null) {
+    return res.status(400).json({
+      status: 400,
+      error: `${output.error.details[0].message}`
+    });
+  }
+  next();
+};
+export { signUp, signIn, createRedflag, editlocation, editcomment };

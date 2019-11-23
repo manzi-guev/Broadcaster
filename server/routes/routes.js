@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable node/no-unsupported-features/es-syntax */
 import express from 'express';
-import { signUp, signIn, createRedflag, editlocation } from '../middlewares/validation.middleware';
+import { signUp, signIn, createRedflag, editlocation, editcomment } from '../middlewares/validation.middleware';
 import userController from '../controllers/userController';
 import redflagController from '../controllers/redflagController';
 import token from '../middlewares/token.middleware';
@@ -15,5 +15,6 @@ route.get('/api/v1/red-flags', redflagController.viewredflags);
 route.get('/api/v1/red-flags/:id', redflagController.viewSpecificflag);
 route.delete('/api/v1/red-flags/:id', token, owner, redflagController.delete);
 route.patch('/api/v1/red-flags/:id/location', token, owner, editlocation, redflagController.editLocation);
+route.patch('/api/v1/red-flags/:id/comment', token, owner, editcomment, redflagController.editComment);
 
 export default route;
