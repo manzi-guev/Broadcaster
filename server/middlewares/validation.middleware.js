@@ -40,4 +40,23 @@ const signUp = (req, res, next) => {
   req.user = schema;
   next();
 };
-export default signUp;
+const signIn = (req, res, next) => {
+  const schema = {
+    email: Joi.string()
+      .trim()
+      .required()
+      .email(),
+    password: Joi.string()
+      .trim()
+      .required()
+  };
+  const output = Joi.validate(req.body, schema);
+  if (output.error != null) {
+    return res.status(400).json({
+      status: 400,
+      error: `${output.error.details[0].message}`
+    });
+  }
+  next();
+};
+export { signUp, signIn };
