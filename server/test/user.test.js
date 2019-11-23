@@ -173,6 +173,18 @@ describe('RedFlag Tests', () => {
         done();
       });
   });
+  it('Viewing specific redflag that doesnt exist', done => {
+    const id = 1;
+    chai
+      .request(app)
+      .get(`/api/v1/red-flags/${id}`)
+      .send()
+      .end((err, res) => {
+        res.should.have.status(404);
+        res.body.should.have.property('error', 'Redflag not found');
+        done();
+      });
+  });
   it('Redflag created', done => {
     chai
       .request(app)
@@ -214,6 +226,17 @@ describe('RedFlag Tests', () => {
           'message',
           'Success. List of all red-flags'
         );
+        done();
+      });
+  });
+  it('Viewing specific redflag', done => {
+    const id = 1;
+    chai
+      .request(app)
+      .get(`/api/v1/red-flags/${id}`)
+      .send()
+      .end((err, res) => {
+        res.should.have.status(200);
         done();
       });
   });

@@ -40,6 +40,21 @@ class redflagController {
       data: redflags
     });
   }
+
+  static viewSpecificflag(req, res) {
+    const id = parseInt(req.params.id, 10);
+    const foundRedflagIndex = redflags.find(flag => flag.id === id);
+    if (foundRedflagIndex) {
+      return res.status(200).json({
+        status: 200,
+        data: foundRedflagIndex
+      });
+    }
+    return res.status(404).json({
+      status: 404,
+      error: 'Redflag not found'
+    });
+  }
 }
 
 export default redflagController;
