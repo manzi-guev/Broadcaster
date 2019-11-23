@@ -127,3 +127,16 @@ describe('App Test', () => {
       });
   });
 });
+describe('RedFlag Tests', () => {
+  it('Viewing all redflags when they doesnt exist', done => {
+    chai
+      .request(app)
+      .get('/api/v1/red-flags')
+      .send()
+      .end((err, res) => {
+        res.should.have.status(404);
+        res.body.should.have.property('error', 'Redflags not found');
+        done();
+      });
+  });
+});
