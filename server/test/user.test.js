@@ -70,6 +70,12 @@ const updatelocation = {
 const emptylocation = {
   location: ''
 };
+const updatecomment = {
+  comment: 'Please do something about this'
+};
+const emptycomment = {
+  comment: ''
+};
 
 describe('User tests', () => {
   it('Not authorized', done => {
@@ -203,6 +209,19 @@ describe('App Test', () => {
   });
 });
 describe('RedFlag Tests', () => {
+  it('No redflag found', done => {
+    const id = 10;
+    chai
+      .request(app)
+      .patch(`/api/v1/red-flags/${id}/location`)
+      .set('token', realtoken)
+      .send()
+      .end((err, res) => {
+        res.should.have.status(404);
+        res.body.should.have.property('error', 'Redflag not found');
+        done();
+      });
+  });
   it('Viewing all redflags when they doesnt exist', done => {
     chai
       .request(app)
@@ -219,6 +238,19 @@ describe('RedFlag Tests', () => {
     chai
       .request(app)
       .get(`/api/v1/red-flags/${id}`)
+      .send()
+      .end((err, res) => {
+        res.should.have.status(404);
+        res.body.should.have.property('error', 'Redflag not found');
+        done();
+      });
+  });
+  it('Updating the location of a redflag that doesnt exist', done => {
+    const id = 1;
+    chai
+      .request(app)
+      .patch(`/api/v1/red-flags/${id}/location`)
+      .set('token', realtoken)
       .send()
       .end((err, res) => {
         res.should.have.status(404);
@@ -293,6 +325,35 @@ describe('RedFlag Tests', () => {
         done();
       });
   });
+  it('Updating the comment of a redflag with empty field', done => {
+    const id = 1;
+    chai
+      .request(app)
+      .patch(`/api/v1/red-flags/${id}/comment`)
+      .set('token', realtoken)
+      .send(emptycomment)
+      .end((err, res) => {
+        res.should.have.status(400);
+        res.body.should.have.property(
+          'error',
+          '"comment" is not allowed to be empty'
+        );
+        done();
+      });
+  });
+  it('Updating the comment of a redflag', done => {
+    const id = 1;
+    chai
+      .request(app)
+      .patch(`/api/v1/red-flags/${id}/comment`)
+      .set('token', realtoken)
+      .send(updatecomment)
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.should.have.property('message', 'Updated red-flag comment');
+        done();
+      });
+  });
   it('Updating the location of a redflag', done => {
     const id = 1;
     chai
@@ -342,6 +403,19 @@ describe('RedFlag Tests', () => {
     chai
       .request(app)
       .delete(`/api/v1/red-flags/${id}`)
+      .set('token', realtoken)
+      .send()
+      .end((err, res) => {
+        res.should.have.status(404);
+        res.body.should.have.property('error', 'Redflag not found');
+        done();
+      });
+  });
+  it('Updating the comment of a redflag that doesnt exist', done => {
+    const id = 1;
+    chai
+      .request(app)
+      .patch(`/api/v1/red-flags/${id}/comment`)
       .set('token', realtoken)
       .send()
       .end((err, res) => {

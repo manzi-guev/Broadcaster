@@ -86,6 +86,23 @@ class redflagController {
       });
     }
   }
+
+  static editComment(req, res) {
+    const id = parseInt(req.params.id, 10);
+    const redflag = redflags.find(flag => flag.id === id);
+    /* istanbul ignore else */
+    if (redflag) {
+      redflag.comment = req.body.comment;
+      return res.status(200).json({
+        status: 200,
+        message: 'Updated red-flag comment',
+        data: {
+          id: redflag.id,
+          comment: redflag.comment
+        }
+      });
+    }
+  }
 }
 
 export default redflagController;
