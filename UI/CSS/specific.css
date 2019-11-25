@@ -184,13 +184,12 @@ a:hover {
     text-transform: uppercase;
     border-radius: 4px;
     font-weight: 400;
-    display: block;
-    width: 100%;
+    width: 50%;
     cursor: pointer;
     border: 1px solid rgba(255, 255, 255, 0.2);
     background: transparent;
-    text-align: center;
     text-decoration: none;
+    text-align: center;
   }
   
   .btn:hover {
@@ -208,6 +207,8 @@ a:hover {
   .cards_item {
     display: flex;
     padding: 1rem;
+    margin-left: auto;
+    margin-right: auto;
   }
   
   @media (min-width: 40rem) {
@@ -226,9 +227,10 @@ a:hover {
     background-color:rgb(102, 100, 100);
     border-radius: 0.25rem;
     box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
-    display: flex;
+    /* display: flex; */
     flex-direction: column;
     overflow: hidden;
+    width: 100%;
   }
   
   .card_content {
