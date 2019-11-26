@@ -3,25 +3,24 @@
 
 <head>
     <title>User Page</title>
-    <link rel="stylesheet" type="text/css" href="../CSS/userpage.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
         integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/bebas" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../CSS/userpage.css">
 </head>
 
 <body>
     <div class="navbar">
         <a href="../HTML/userpage.html" class="active">Home</a>
-        <a href="#news">USER'S PROFILE</a>
         <div class="float">
             <div class="dropdown">
                 <button class="dropbtn">Other
                     <i class="fa fa-caret-down"></i>
                 </button>
                 <div class="dropdown-content">
-                    <a href="../HTML/other.html">Red-Flags/Interventions</a>
+                    <a href="../HTML/other.html">Interventions</a>
                 </div>
             </div>
             <div class="dropdown">
@@ -29,156 +28,86 @@
                     <i class="fa fa-caret-down"></i>
                 </button>
                 <div class="dropdown-content">
-                    <a href="../HTML/new.html">Red Flag/Intervention</a>
+                    <a href="../HTML/new.html">Red Flag</a>
+                    <a href="../HTML/newint.html">Intervention</a>
                 </div>
             </div>
             <a href="../index.html">LogOut</a>
             <input type="text" placeholder="Search..">
         </div>
     </div>
-    <h1 align="center">Redflags/Interventions</h1>
+    <h1 align="center" id="h1">USER'S PROFILE</h1>
     <hr>
     <br>
+    <div class="boxess">
+            <div align="center">
+                <br>
+                <br>
+                <img src="https://cdn1.vectorstock.com/i/thumb-large/16/05/male-avatar-profile-picture-silhouette-light-vector-5351605.jpg" alt="" class="avatar">
+                    <h3 id="border"><b>REDFLAG NOTIFICATIONS</b></h3>
+                    <a href="#" class="badge1" data-badge="1" id="badge"><span class="badge-black">Resolved</span> </a>
+                    <span></span>
+                    <a href="#" class="badge2" data-badge="0" id="badge"><span class="badge-black">Rejected</span> </a>
+                    <span></span>
+                    <a href="#" class="badge3" data-badge="2" id="badge"><span class="badge-black">Under Investigation</span></a>
+                    <span></span>
+                    <a href="#" class="badge4" data-badge="0" id="badge"><span class="badge-black">Draft</span></a>
+                    <span></span>
+                    <br>
+                    <br>
+                </div>
+                <div align="center">
+                    <h3><b>INTERVENTION NOTIFICATIONS</b></h3>
+                    <a href="#" class="badge1" data-badge="2" id="badge"><span class="badge-black">Resolved</span> </a>
+                    <span></span>
+                    <a href="#" class="badge2" data-badge="1" id="badge"><span class="badge-black">Rejected</span> </a>
+                    <span></span>
+                    <a href="#" class="badge3" data-badge="1" id="badge"><span class="badge-black">Under Investigation</span></a>
+                    <span></span>
+                    <a href="#" class="badge4" data-badge="2" id="badge"><span class="badge-black">Draft</span></a>
+                    <span></span>
+                    <br>
+                    <br>
+                </div>
+    </div>
+    <br>
     <div align="center">
-        <h3><b>REDFLAG NOTIFICATIONS</b></h3>
-        <a href="#" class="badge1" data-badge="0" id="badge">Resolved</a>
-        <span></span>
-        <a href="#" class="badge2" data-badge="1" id="badge">Rejected</a>
-        <span></span>
-        <a href="#" class="badge3" data-badge="0" id="badge">Under Investigation</a>
-        <span></span>
-        <a href="#" class="badge4" data-badge="1" id="badge">Draft</a>
-        <span></span>
-        <br>
-        <br>
+            <h2><b>ALL RED-FLAGS</b></h2>
     </div>
-    <div align="center">
-        <h3><b>INTERVENTION NOTIFICATIONS</b></h3>
-        <a href="#" class="badge1" data-badge="1" id="badge">Resolved</a>
-        <span></span>
-        <a href="#" class="badge2" data-badge="1" id="badge">Rejected</a>
-        <span></span>
-        <a href="#" class="badge3" data-badge="1" id="badge">Under Investigation</a>
-        <span></span>
-        <a href="#" class="badge4" data-badge="1" id="badge">Draft</a>
-        <span></span>
-        <br>
-        <br>
-        <h3><b>LIST OF ALL RED-FLAGS/INTERVENTIONS</b></h3>
-    </div>
-    <div class="scroll">
-        <table id="redflags">
-            <tr>
-                <th>CreatedOn</th>
-                <th>Title</th>
-                <th>Type</th>
-                <th>Comment</th>
-                <th>Location(Long and Lat)</th>
-                <th>Status</th>
-                <th>Image link</th>
-                <th>Video link</th>
-                <th>Action</th>
-            </tr>
-            <tr>
-                <td>20th-Oct-2019</td>
-                <td>Corruption</td>
-                <td>Red-flag</td>
-                <td>I saw corruption</td>
-                <td>-1.970579, 30.104429</td>
-                <td class="under">Pending...</td>
-                <td><img
-                        src="https://image.shutterstock.com/image-photo/concept-corruption-finance-profit-bail-260nw-724106536.jpg">
-                </td>
-                <td>no video</td>
-                <td>
-                    <a href="../HTML/edit.html"><i class='far fa-edit' id="icon1"></i></a>
-                    <span></span>
-                    <a href=""><i class='far fa-trash-alt' id="icon2"></i></a>
-                    <span></span>
-                </td>
-            </tr>
-            <tr>
-                <td>1st-Oct-2019</td>
-                <td>Stealing</td>
-                <td>Intervention</td>
-                <td>no comment</td>
-                <td>-1.504430, 29.635160</td>
-                <td class="under">Draft</td>
-                <td>no image</td>
-                <td>no video</td>
-                <td>
-                    <a href="../HTML/edit.html"><i class='far fa-edit' id="icon1"></i></a>
-                    <span></span>
-                    <a href=""><i class='far fa-trash-alt' id="icon2"></i></a>
-                    <span></span>
-                </td>
-            </tr>
-            <tr>
-                <td>20th-Jan-2019</td>
-                <td>Loss of identification card</td>
-                <td>Red-flag</td>
-                <td>Call this number +250785802789</td>
-                <td>-1.966400, 30.077100</td>
-                <td class="success">Rejected</td>
-                <td>no image</td>
-                <td>no video</td>
-                <td>
-                    <a href="../HTML/edit.html"><i class='far fa-edit' id="icon1"></i></a>
-                    <span></span>
-                    <a href=""><i class='far fa-trash-alt' id="icon2"></i></a>
-                    <span></span>
-                </td>
-            </tr>
-            <tr>
-                <td>4th-Oct-2019</td>
-                <td>Rape</td>
-                <td>Intervention</td>
-                <td>rape in Gisenyi</td>
-                <td>-1.703030, 29.260441</td>
-                <td class="rejected">Resolved</td>
-                <td>no image</td>
-                <td>no video</td>
-                <td>
-                    <a href="../HTML/edit.html"><i class='far fa-edit' id="icon1"></i></a>
-                    <span></span>
-                    <a href=""><i class='far fa-trash-alt' id="icon2"></i></a>
-                    <span></span>
-                </td>
-            </tr>
-            <tr>
-                <td>5th-Nov-2019</td>
-                <td>Corruption</td>
-                <td>Red-flag</td>
-                <td>I saw corruption</td>
-                <td>-1.970579, 30.104429</td>
-                <td class="draft">Draft</td>
-                <td>no image</td>
-                <td>no video</td>
-                <td>
-                    <a href="../HTML/edit.html"><i class='far fa-edit' id="icon1"></i></a>
-                    <span></span>
-                    <a href=""><i class='far fa-trash-alt' id="icon2"></i></a>
-                    <span></span>
-                </td>
-            </tr>
-            <tr>
-                <td>10th-Mar-2019</td>
-                <td>Murder</td>
-                <td>Intervention</td>
-                <td>no comment</td>
-                <td>-2.581550, 29.713760</td>
-                <td class="under">Under investigation</td>
-                <td>no image</td>
-                <td>no video</td>
-                <td>
-                    <a href="../HTML/edit.html"><i class='far fa-edit' id="icon1"></i></a>
-                    <span></span>
-                    <a href=""><i class='far fa-trash-alt' id="icon2"></i></a>
-                    <span></span>
-                </td>
-            </tr>
-        </table>
-    </div>
+    <div class="main">  
+            <ul class="cards">
+              <li class="cards_item">
+                <div class="card">
+                  <div class="card_image"><img src="https://thenypost.files.wordpress.com/2018/06/180622-bank-robber.jpg?quality=90&strip=all&w=618&h=410&crop=1"></div>
+                  <div class="card_content">
+                    <h2 class="card_title">Robbery</h2>
+                    <p class="card_text">Last night in Gisenyi we witnessed robbery with our own eyes.</p>
+                    <a class="btn card_btn" href="../HTML/specific.html">Read More</a>
+                  </div>
+                </div>
+              </li>
+              <li class="cards_item">
+                <div class="card">
+                  <div class="card_image"><img src="https://media.dhakatribune.com/uploads/2019/04/bigstock-man-s-hand-holding-a-woman-rape-291018214-1555340645707.jpg"></div>
+                  <div class="card_content">
+                    <h2 class="card_title">Rape</h2>
+                    <p class="card_text">Too many rape cases are happening now</p>
+                    <a class="btn card_btn" href="../HTML/specific.html">Read More</a>
+                  </div>
+                </div>
+              </li>
+              <li class="cards_item">
+                <div class="card">
+                  <div class="card_image"><img src="https://cdn.images.express.co.uk/img/dynamic/109/590x/CORRUPT-669514.jpg"></div>
+                  <div class="card_content">
+                    <h2 class="card_title">Corruption</h2>
+                    <p class="card_text">I was corrupted yesterday</p>
+                    <a class="btn card_btn" href="../HTML/specific.html">Read More</a>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
 </body>
 
 </html>
