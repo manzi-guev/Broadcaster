@@ -3,21 +3,24 @@ html {
 }
 
 body {
-    background-color: rgb(102, 100, 100);
+    background-color: rgb(245, 235, 235);
     padding: 0;
     margin: 0;
     font-family: 'Montserrat', sans-serif;
 }
-
-h1 {
-    font-size: 1.5em;
-    color: white;
-    /* font-family: 'BebasNeueRegular'; */
-    font-style: normal;
-}
 i{
   font-size: 100px;
-  color: white;
+  color: rgb(136, 46, 46);
+}
+#home{
+  color: black;
+}
+
+#h1 {
+    font-size: 2em;
+    color: white;
+    font-family: 'BebasNeueRegular';
+    font-style: normal;
 }
 
 .navbar input[type=text] {
@@ -35,12 +38,12 @@ i{
 }
 
 .active {
-    background-color: rgb(102, 100, 100);
+    background-color: rgb(245, 235, 235);
 }
 
 .navbar {
     overflow: hidden;
-    background-color: rgb(92, 145, 139);
+    background-color: rgb(136, 46, 46);
 }
 
 .navbar a {
@@ -132,7 +135,7 @@ i{
 
 hr {
     width: 400px;
-    border-top: 1px solid #f8f8f8;
+    /* border-top: 1px solid #f8f8f8; */
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
@@ -153,11 +156,11 @@ hr {
 }
 
 a:hover {
-    background-color: rgb(76, 122, 117);
+    background-color: rgb(109, 33, 33);
 }
 
 .active:hover {
-    background-color: rgb(102, 100, 100);
+    background-color: rgb(245, 235, 235);
 }
 *,
 *::before,
@@ -169,6 +172,13 @@ a:hover {
     margin: 0 auto;
   }
   
+  h1 {
+    /* color: white; */
+      font-size: 24px;
+      font-weight: 400;
+      text-align: center;
+  }
+  
   img {
     height: auto;
     max-width: 100%;
@@ -176,7 +186,7 @@ a:hover {
   }
   
   .btn {
-    color: #ffffff;
+    color: black;
     padding: 0.8rem;
     font-size: 14px;
     text-transform: uppercase;
@@ -185,7 +195,7 @@ a:hover {
     display: block;
     width: 100%;
     cursor: pointer;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgb(136, 46, 46);
     background: transparent;
     text-align: center;
     text-decoration: none;
@@ -221,7 +231,7 @@ a:hover {
   }
   
   .card {
-    background-color:rgb(102, 100, 100);
+    background-color:white;
     border-radius: 0.25rem;
     box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
     display: flex;
@@ -231,7 +241,8 @@ a:hover {
   
   .card_content {
     padding: 1rem;
-    background-color: rgb(102, 100, 100);
+    background-color: white;
+    color: black;
   
   }
   .card_image{
@@ -239,7 +250,6 @@ a:hover {
   }
   
   .card_title {
-    color: #ffffff;
     font-size: 1.1rem;
     font-weight: 700;
     letter-spacing: 1px;
@@ -248,13 +258,12 @@ a:hover {
   }
   
   .card_text {
-    color: #ffffff;
     font-size: 0.875rem;
     line-height: 1.5;
     margin-bottom: 1.25rem;    
     white-space: nowrap; 
     width: 300px; 
     overflow: hidden;
-    text-overflow: ellipsis;
+    text-overflow: ellipsis; 
   }
   
