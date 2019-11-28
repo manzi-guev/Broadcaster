@@ -2,9 +2,8 @@
 /* eslint-disable consistent-return */
 /* eslint-disable node/no-unsupported-features/es-syntax */
 import jwt from 'jsonwebtoken';
-import users from '../models/users';
+import { users, userModel } from '../models/users';
 
-let findUser;
 const checkToken = (req, res, next) => {
   try {
     const takeToken = req.header('token');
@@ -15,20 +14,19 @@ const checkToken = (req, res, next) => {
       });
     }
     const { email } = jwt.verify(req.header('token'), process.env.KEY);
-    findUser = users.find(user => user.email === email);
+    const findUser = users.find(user => user.email === email);
+    if (!findUser) {
+      return res.status(401).json({
+        status: 401,
+        error: 'Not authorized'
+      });
+    }
+    next();
   } catch (error) {
     return res.status(400).json({
       status: 400,
       error: error.message
     });
   }
-
-  if (!findUser) {
-    return res.status(401).json({
-      status: 401,
-      error: 'Not authorized'
-    });
-  }
-  next();
 };
 export default checkToken;

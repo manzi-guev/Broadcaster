@@ -1,10 +1,10 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable node/no-unsupported-features/es-syntax */
 import express from 'express';
-import { signUp, signIn, createRedflag, editlocation, editcomment } from '../middlewares/validation.middleware';
+import { signUp, signIn, createRedflag, editlocation, editcomment } from '../middlewares/validation';
 import userController from '../controllers/userController';
 import redflagController from '../controllers/redflagController';
-import token from '../middlewares/token.middleware';
+import token from '../middlewares/token';
 import owner from '../middlewares/owner';
 
 const route = express();
