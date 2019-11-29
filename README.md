@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/manzi-guev/Broadcaster.svg?branch=develop)](https://travis-ci.org/manzi-guev/Broadcaster)
 [![Coverage Status](https://coveralls.io/repos/github/manzi-guev/Broadcaster/badge.svg?branch=develop)](https://coveralls.io/github/manzi-guev/Broadcaster?branch=develop)
+[![Maintainability](https://api.codeclimate.com/v1/badges/81daf282d170ea653954/maintainability)](https://codeclimate.com/github/manzi-guev/Broadcaster/maintainability)
 
 # Broadcaster
 
@@ -37,6 +38,9 @@ Everyone in the world. Especially in Africa.
 | /api/v1/red-flags/:id          | Delete  |                users can delete redflags |
 | /api/v1/red-flags/:id/comment  |  Patch  |  users can edit the comment of a redflag |
 | /api/v1/red-flags/:id/location |  Patch  | users can edit the location of a redflag |
+
+# API Documentation
+[https://documenter.getpostman.com/view/8149811/SW7f16Rr?version=latest](Documentation link)
 
 # User Interface
 

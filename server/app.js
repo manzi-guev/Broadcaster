@@ -20,6 +20,12 @@ app.get('/', (req, res) => {
     message: 'Welcome to Broadcaster'
   });
 });
+app.get('*', (req, res) => {
+  res.status(404).json({
+    status: 404,
+    error: 'Route not found'
+  });
+});
 
 const port = process.env.PORT;
 app.listen(port, () => {
