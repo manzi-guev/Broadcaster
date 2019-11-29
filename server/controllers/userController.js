@@ -12,7 +12,14 @@ class userController {
         status: 201,
         token: tokengenerator(email),
         message: 'User succesfully created',
-        data: users[users.length - 1]
+        data: {
+          id: users[users.length - 1].id,
+          firstname: users[users.length - 1].firstname,
+          lastname: users[users.length - 1].lastname,
+          email: users[users.length - 1].email,
+          phonenumber: users[users.length - 1].phonenumber,
+          username: users[users.length - 1].username
+        }
       });
     }
     return res.status(409).json({

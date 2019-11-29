@@ -207,6 +207,17 @@ describe('App Test', () => {
         done();
       });
   });
+  it('Route not found', done => {
+    chai
+      .request(app)
+      .get('/rtgh')
+      .send()
+      .end((err, res) => {
+        res.should.have.status(404);
+        res.body.should.have.property('error', 'Route not found');
+        done();
+      });
+  });
 });
 describe('RedFlag Tests', () => {
   it('No redflag found', done => {
