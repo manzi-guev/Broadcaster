@@ -2,7 +2,7 @@
 import chai from 'chai';
 import http from 'chai-http';
 import app from '../app';
-import gentoken from '../helpers/token.helper';
+import gentoken from '../helpers/helperToken';
 
 chai.use(http);
 chai.should();
@@ -273,6 +273,21 @@ describe('RedFlag Tests', () => {
         done();
       });
   });
+  it(' Second Redflag created', done => {
+    chai
+      .request(app)
+      .post('/api/v1/red-flags')
+      .set('token', realtoken)
+      .send(redflag)
+      .end((err, res) => {
+        res.should.have.status(201);
+        res.body.should.have.property(
+          'message',
+          'Redflag successfully created'
+        );
+        done();
+      });
+  });
   it('Redflag having empty fields', done => {
     chai
       .request(app)
@@ -399,7 +414,7 @@ describe('RedFlag Tests', () => {
       });
   });
   it('Deleting a redflag that doesnt exist', done => {
-    const id = 2;
+    const id = 3;
     chai
       .request(app)
       .delete(`/api/v1/red-flags/${id}`)

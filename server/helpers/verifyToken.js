@@ -8,7 +8,6 @@ const decodeToken = token => {
   try {
     const { email } = jwt.verify(token, process.env.KEY);
     return email;
-    /* istanbul ignore catch */
   } catch (error) {
     // eslint-disable-next-line no-undef
     res.status(400).json({

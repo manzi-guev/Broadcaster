@@ -1,25 +1,10 @@
 /* eslint-disable consistent-return */
 /* eslint-disable node/no-unsupported-features/es-syntax */
-import moment from 'moment';
-import redflags from '../models/redflags';
-import taketoken from '../helpers/token.verifier';
+import { redflags, redflag } from '../models/redflags';
 
 class redflagController {
   static create(req, res) {
-    const { title, type, comment, location, status, images, videos } = req.body;
-    const newRedflag = {
-      id: redflags.length + 1,
-      createdOn: moment().format('MMMM Do YYYY, h:mm:ss a'),
-      createdBy: taketoken(req.header('token')),
-      title,
-      type,
-      comment,
-      location,
-      status,
-      images,
-      videos
-    };
-    redflags.push(newRedflag);
+    const newRedflag = redflag.create(req);
     return res.status(201).json({
       status: 201,
       message: 'Redflag successfully created',
@@ -28,8 +13,8 @@ class redflagController {
   }
 
   static viewredflags(req, res) {
-    const all = redflags.find(flag => flag.id);
-    if (!all) {
+    const all = redflags;
+    if (all.length === 0) {
       return res.status(404).json({
         status: 404,
         error: 'Redflags not found'
@@ -43,12 +28,11 @@ class redflagController {
   }
 
   static viewSpecificflag(req, res) {
-    const id = parseInt(req.params.id, 10);
-    const foundRedflagIndex = redflags.find(flag => flag.id === id);
-    if (foundRedflagIndex) {
+    const found = redflag.findRedFlag(parseInt(req.params.id, 10));
+    if (found) {
       return res.status(200).json({
         status: 200,
-        data: foundRedflagIndex
+        data: found
       });
     }
     return res.status(404).json({
@@ -58,50 +42,42 @@ class redflagController {
   }
 
   static delete(req, res) {
-    const id = parseInt(req.params.id, 10);
-    const foundRedflagIndex = redflags.find(flag => flag.id === id);
+    redflag.deleteRedFlag(parseInt(req.params.id, 10));
     /* istanbul ignore else */
-    if (foundRedflagIndex) {
-      redflags.splice(redflags.indexOf(foundRedflagIndex), 1);
-      return res.status(200).json({
-        status: 200,
-        message: 'Redflag successfully deleted'
-      });
-    }
-  }
-
-  static editLocation(req, res) {
-    const id = parseInt(req.params.id, 10);
-    const redflag = redflags.find(flag => flag.id === id);
-    /* istanbul ignore else */
-    if (redflag) {
-      redflag.location = req.body.location;
-      return res.status(200).json({
-        status: 200,
-        message: 'Updated red-flag location',
-        data: {
-          id: redflag.id,
-          location: redflag.location
-        }
-      });
-    }
+    return res.status(200).json({
+      status: 200,
+      message: 'Redflag successfully deleted'
+    });
   }
 
   static editComment(req, res) {
-    const id = parseInt(req.params.id, 10);
-    const redflag = redflags.find(flag => flag.id === id);
-    /* istanbul ignore else */
-    if (redflag) {
-      redflag.comment = req.body.comment;
-      return res.status(200).json({
-        status: 200,
-        message: 'Updated red-flag comment',
-        data: {
-          id: redflag.id,
-          comment: redflag.comment
-        }
-      });
-    }
+    const updated = redflag.commentRedflag(
+      parseInt(req.params.id, 10),
+      req.body.comment
+    );
+    return res.status(200).json({
+      status: 200,
+      message: 'Updated red-flag comment',
+      data: {
+        id: updated.id,
+        comment: updated.comment
+      }
+    });
+  }
+
+  static editLocation(req, res) {
+    const updated = redflag.locationRedflag(
+      parseInt(req.params.id, 10),
+      req.body.location
+    );
+    return res.status(200).json({
+      status: 200,
+      message: 'Updated red-flag location',
+      data: {
+        id: updated.id,
+        comment: updated.location
+      }
+    });
   }
 }
 
