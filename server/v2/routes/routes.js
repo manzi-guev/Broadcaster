@@ -3,7 +3,8 @@ import express from 'express';
 import {
   signUp,
   signIn,
-  createRedflag
+  createRedflag,
+  editlocation
 } from '../middleware/validation.middleware';
 import userController from '../controllers/userController';
 import redflagController from '../controllers/redflagController';
@@ -18,5 +19,12 @@ route.post('/api/v2/red-flags', token, createRedflag, redflagController.create);
 route.get('/api/v2/red-flags', redflagController.viewredflags);
 route.get('/api/v2/red-flags/:id', redflagController.viewSpecificflag);
 route.delete('/api/v2/red-flags/:id', token, owner, redflagController.delete);
+route.patch(
+  '/api/v2/red-flags/:id/location',
+  token,
+  owner,
+  editlocation,
+  redflagController.editLocation
+);
 
 export default route;
