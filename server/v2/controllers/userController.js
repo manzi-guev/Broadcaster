@@ -44,5 +44,27 @@ class userController {
       error: 'User already exists'
     });
   }
+
+  static async signin(req, res) {
+    const { email, password } = req.body;
+    const finduser = await con.query(users.findUser, [email]);
+    if (finduser.rowCount === 0) {
+      return res.status(404).json({
+        status: 404,
+        error: 'User with provided email doesnt exist'
+      });
+    }
+    if (bcrypt.compareSync(password, finduser.rows[0].password)) {
+      return res.status(200).json({
+        status: 200,
+        token: tokengenerator(email),
+        message: 'User successfully logged in'
+      });
+    }
+    return res.status(401).json({
+      status: 401,
+      error: 'Password is incorrect'
+    });
+  }
 }
 export default userController;
