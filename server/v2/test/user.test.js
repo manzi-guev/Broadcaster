@@ -79,7 +79,19 @@ const emptylocation = {
   location: ''
 };
 const nouser = {};
-describe('User tests', () => {
+describe('User tests for Version 2', () => {
+  it('Not authorized', done => {
+    chai
+      .request(app)
+      .post('/api/v2/red-flags')
+      .set('token', realtoken)
+      .send(nouser)
+      .end((err, res) => {
+        res.should.have.status(401);
+        res.body.should.have.property('error', 'Not authorized');
+        done();
+      });
+  });
   it('User should be able to create an account', done => {
     chai
       .request(app)
@@ -185,7 +197,54 @@ describe('User tests', () => {
       });
   });
 });
-describe('User tests', () => {
+describe('RedFlag Tests', () => {
+  it('Redflag created', done => {
+    chai
+      .request(app)
+      .post('/api/v2/red-flags')
+      .set('token', realtoken)
+      .send(redflag)
+      .end((err, res) => {
+        res.should.have.status(201);
+        res.body.should.have.property(
+          'message',
+          'Redflag successfully created'
+        );
+        done();
+      });
+  });
+  it('Second Redflag created', done => {
+    chai
+      .request(app)
+      .post('/api/v2/red-flags')
+      .set('token', realtoken)
+      .send(redflag)
+      .end((err, res) => {
+        res.should.have.status(201);
+        res.body.should.have.property(
+          'message',
+          'Redflag successfully created'
+        );
+        done();
+      });
+  });
+  it('Redflag having empty fields', done => {
+    chai
+      .request(app)
+      .post('/api/v2/red-flags')
+      .set('token', realtoken)
+      .send(redflagempty)
+      .end((err, res) => {
+        res.should.have.status(400);
+        res.body.should.have.property(
+          'error',
+          '"title" is not allowed to be empty'
+        );
+        done();
+      });
+  });
+});
+describe('User tests for Version 1', () => {
   it('Not authorized', done => {
     chai
       .request(app)
