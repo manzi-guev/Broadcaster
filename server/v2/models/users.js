@@ -7,4 +7,13 @@ const createUser = `CREATE TABLE IF NOT EXISTS users (
     username text,
     password text
 )`;
-export default { createUser };
+const insertUser = `INSERT INTO users (
+    firstname,
+    lastname,
+    email,
+    phonenumber,
+    username,
+    password
+    ) VALUES ($1,$2,$3,$4,$5,$6) ON CONFLICT DO NOTHING returning *`;
+const findUser = `select * from users where email = ($1)`;
+export default { createUser, insertUser, findUser };

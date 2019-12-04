@@ -3,6 +3,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import routes from './v1/routes/routes';
+import routes2 from './v2/routes/routes';
 
 const app = express();
 dotenv.config();
@@ -14,6 +15,7 @@ app.use(
   })
 );
 app.use(routes);
+app.use(routes2);
 app.get('/', (req, res) => {
   res.status(200).json({
     status: 200,
