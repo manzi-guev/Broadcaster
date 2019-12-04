@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 let pool;
+/* istanbul ignore else */
 if (process.env.NODE_ENV === 'TEST') {
   pool = new Pool({
     connectionString: process.env.DBTEST

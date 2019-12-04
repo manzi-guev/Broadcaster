@@ -7,6 +7,7 @@
     "start": "npm run build && node build/app.js",
     "build": "babel ./server -d build",
     "dev": "npm run createusertable && npm run createredflag && nodemon --exec babel-node ./server/app.js",
+    "dev2": "nodemon --exec babel-node ./server/app.js",
     "cleantable":"node --require babel-polyfill --require babel-register ./server/v2/db/clean",
     "createredflag": "node --require babel-polyfill --require babel-register ./server/v2/db/redflags",
     "createusertable": "node --require babel-polyfill --require babel-register ./server/v2/db/createuserTable",

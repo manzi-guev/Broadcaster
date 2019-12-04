@@ -4,7 +4,7 @@ import http from 'chai-http';
 import { describe, it } from 'mocha';
 import dotenv from 'dotenv';
 import app from '../../app';
-import gentoken from '../helpers/token.helper';
+import gentoken from '../helpers/helperToken';
 
 dotenv.config();
 
@@ -87,6 +87,7 @@ describe('User tests for Version 2', () => {
       .set('token', realtoken)
       .send(nouser)
       .end((err, res) => {
+        console.log(process.env.NODE_ENV);
         res.should.have.status(401);
         res.body.should.have.property('error', 'Not authorized');
         done();
@@ -198,6 +199,19 @@ describe('User tests for Version 2', () => {
   });
 });
 describe('RedFlag Tests', () => {
+  it('No redflag found', done => {
+    const id = 10;
+    chai
+      .request(app)
+      .patch(`/api/v2/red-flags/${id}/location`)
+      .set('token', realtoken)
+      .send()
+      .end((err, res) => {
+        res.should.have.status(404);
+        res.body.should.have.property('error', 'Redflag not found');
+        done();
+      });
+  });
   it('Viewing redflag that doesnt exist', done => {
     chai
       .request(app)
@@ -264,20 +278,6 @@ describe('RedFlag Tests', () => {
         done();
       });
   });
-  it('Viewing all redflags', done => {
-    chai
-      .request(app)
-      .get('/api/v2/red-flags')
-      .send(redflag)
-      .end((err, res) => {
-        res.should.have.status(200);
-        res.body.should.have.property(
-          'message',
-          'Success. List of all red-flags'
-        );
-        done();
-      });
-  });
   it('Redflag having empty fields', done => {
     chai
       .request(app)
@@ -289,6 +289,20 @@ describe('RedFlag Tests', () => {
         res.body.should.have.property(
           'error',
           '"title" is not allowed to be empty'
+        );
+        done();
+      });
+  });
+  it('Viewing all redflags', done => {
+    chai
+      .request(app)
+      .get('/api/v2/red-flags')
+      .send(redflag)
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.should.have.property(
+          'message',
+          'Success. List of all red-flags'
         );
         done();
       });
@@ -313,6 +327,35 @@ describe('RedFlag Tests', () => {
       .send()
       .end((err, res) => {
         res.should.have.status(200);
+        done();
+      });
+  });
+  it('Updating the comment of a redflag with empty field', done => {
+    const id = 1;
+    chai
+      .request(app)
+      .patch(`/api/v2/red-flags/${id}/comment`)
+      .set('token', realtoken)
+      .send(emptycomment)
+      .end((err, res) => {
+        res.should.have.status(400);
+        res.body.should.have.property(
+          'error',
+          '"comment" is not allowed to be empty'
+        );
+        done();
+      });
+  });
+  it('Updating the comment of a redflag', done => {
+    const id = 1;
+    chai
+      .request(app)
+      .patch(`/api/v2/red-flags/${id}/comment`)
+      .set('token', realtoken)
+      .send(updatecomment)
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.should.have.property('message', 'Updated red-flag comment');
         done();
       });
   });
@@ -370,6 +413,113 @@ describe('RedFlag Tests', () => {
       .end((err, res) => {
         res.should.have.status(404);
         res.body.should.have.property('error', 'Redflag not found');
+        done();
+      });
+  });
+  it('Updating the comment of a redflag that doesnt exist', done => {
+    const id = 1;
+    chai
+      .request(app)
+      .patch(`/api/v2/red-flags/${id}/comment`)
+      .set('token', realtoken)
+      .send()
+      .end((err, res) => {
+        res.should.have.status(404);
+        res.body.should.have.property('error', 'Redflag not found');
+        done();
+      });
+  });
+});
+describe('App Test', () => {
+  it('Welcome message', done => {
+    chai
+      .request(app)
+      .get('/')
+      .send()
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.should.have.property('message', 'Welcome to Broadcaster');
+        done();
+      });
+  });
+  it('Route not found for get', done => {
+    chai
+      .request(app)
+      .get('/djdvbjkb')
+      .send()
+      .end((err, res) => {
+        res.should.have.status(404);
+        res.body.should.have.property('error', 'Route not found');
+        done();
+      });
+  });
+  it('Route not found for post', done => {
+    chai
+      .request(app)
+      .post('/djdvbjkb')
+      .send()
+      .end((err, res) => {
+        res.should.have.status(404);
+        res.body.should.have.property('error', 'Route not found');
+        done();
+      });
+  });
+  it('Route not found for delete', done => {
+    chai
+      .request(app)
+      .delete('/djdvbjkb')
+      .send()
+      .end((err, res) => {
+        res.should.have.status(404);
+        res.body.should.have.property('error', 'Route not found');
+        done();
+      });
+  });
+  it('Route not found for patch', done => {
+    chai
+      .request(app)
+      .patch('/djdvbjkb')
+      .send()
+      .end((err, res) => {
+        res.should.have.status(404);
+        res.body.should.have.property('error', 'Route not found');
+        done();
+      });
+  });
+});
+describe('Token Test', () => {
+  it('No token found', done => {
+    chai
+      .request(app)
+      .post('/api/v2/red-flags')
+      .send()
+      .end((err, res) => {
+        res.should.have.status(401);
+        res.body.should.have.property('error', 'No token found');
+        done();
+      });
+  });
+  //   it('Jwt malformed token', done => {
+  //     chai
+  //       .request(app)
+  //       .post('/api/v2/red-flags')
+  //       .set('token', 'hello')
+  //       .send()
+  //       .end((err, res) => {
+  //         res.should.have.status(400);
+  //         res.body.should.have.property('error');
+  //         done();
+  //       });
+  //   });
+  it('Invalid Signature', done => {
+    chai
+      .request(app)
+      .post('/api/v2/red-flags')
+      .set('token', `${realtoken}sbvs`)
+      .send()
+      .end((err, res) => {
+        res.should.have.status(400);
+        res.body.should.have.property('error');
         done();
       });
   });
@@ -543,6 +693,40 @@ describe('RedFlag Tests', () => {
         done();
       });
   });
+  it('Redflag created', done => {
+    chai
+      .request(app)
+      .post('/api/v1/red-flags')
+      .set('token', realtoken)
+      .send(redflag)
+      .end((err, res) => {
+        res.should.have.status(201);
+        res.body.should.have.property(
+          'message',
+          'Redflag successfully created'
+        );
+        done();
+      });
+  });
+  it('Second Redflag created', done => {
+    chai
+      .request(app)
+      .post('/api/v1/red-flags')
+      .set('token', realtoken)
+      .send(redflag)
+      //   .attach(
+      //     'images',
+      //     `${__dirname}../../../redflags/2019_10_22_122129IMG_0395.JPG`
+      //   )
+      .end((err, res) => {
+        res.should.have.status(201);
+        res.body.should.have.property(
+          'message',
+          'Redflag successfully created'
+        );
+        done();
+      });
+  });
   it('Redflag having empty fields', done => {
     chai
       .request(app)
@@ -554,6 +738,116 @@ describe('RedFlag Tests', () => {
         res.body.should.have.property(
           'error',
           '"title" is not allowed to be empty'
+        );
+        done();
+      });
+  });
+  it('Viewing all redflags', done => {
+    chai
+      .request(app)
+      .get('/api/v1/red-flags')
+      .send(redflag)
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.should.have.property(
+          'message',
+          'Success. List of all red-flags'
+        );
+        done();
+      });
+  });
+  it('Not Owner message', done => {
+    const id = 1;
+    chai
+      .request(app)
+      .delete(`/api/v1/red-flags/${id}`)
+      .set('token', faketoken)
+      .end((err, res) => {
+        res.should.have.status(403);
+        res.body.should.have.property('error', 'You are not the owner');
+        done();
+      });
+  });
+  it('Viewing specific redflag', done => {
+    const id = 1;
+    chai
+      .request(app)
+      .get(`/api/v1/red-flags/${id}`)
+      .send()
+      .end((err, res) => {
+        res.should.have.status(200);
+        done();
+      });
+  });
+  it('Updating the comment of a redflag with empty field', done => {
+    const id = 1;
+    chai
+      .request(app)
+      .patch(`/api/v1/red-flags/${id}/comment`)
+      .set('token', realtoken)
+      .send(emptycomment)
+      .end((err, res) => {
+        res.should.have.status(400);
+        res.body.should.have.property(
+          'error',
+          '"comment" is not allowed to be empty'
+        );
+        done();
+      });
+  });
+  it('Updating the comment of a redflag', done => {
+    const id = 1;
+    chai
+      .request(app)
+      .patch(`/api/v1/red-flags/${id}/comment`)
+      .set('token', realtoken)
+      .send(updatecomment)
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.should.have.property('message', 'Updated red-flag comment');
+        done();
+      });
+  });
+  it('Updating the location of a redflag', done => {
+    const id = 1;
+    chai
+      .request(app)
+      .patch(`/api/v1/red-flags/${id}/location`)
+      .set('token', realtoken)
+      .send(updatelocation)
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.should.have.property('message', 'Updated red-flag location');
+        done();
+      });
+  });
+  it('Updating the location of a redflag with empty field', done => {
+    const id = 1;
+    chai
+      .request(app)
+      .patch(`/api/v1/red-flags/${id}/location`)
+      .set('token', realtoken)
+      .send(emptylocation)
+      .end((err, res) => {
+        res.should.have.status(400);
+        res.body.should.have.property(
+          'error',
+          '"location" is not allowed to be empty'
+        );
+        done();
+      });
+  });
+  it('Deleting a redflag', done => {
+    const id = 1;
+    chai
+      .request(app)
+      .delete(`/api/v1/red-flags/${id}`)
+      .set('token', realtoken)
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.should.have.property(
+          'message',
+          'Redflag successfully deleted'
         );
         done();
       });

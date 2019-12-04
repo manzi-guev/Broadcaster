@@ -1,7 +1,7 @@
 /* eslint-disable consistent-return */
 /* eslint-disable node/no-unsupported-features/es-syntax */
 import con from '../db/connection';
-import verifier from '../helpers/token.verifier';
+import verifier from '../helpers/verifyToken';
 import redflags from '../models/redflags';
 
 const access = async (req, res, next) => {
