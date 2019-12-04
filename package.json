@@ -6,7 +6,8 @@
   "scripts": {
     "start": "npm run build && node build/app.js",
     "build": "babel ./server -d build",
-    "dev": "nodemon --exec babel-node ./server/app.js",
+    "dev": "npm run createusertable && nodemon --exec babel-node ./server/app.js",
+    "createusertable": "node --require babel-polyfill --require babel-register ./server/v2/db/createuserTable",
     "test": "nyc --reporter=html --reporter=text mocha --require babel-register --exit server/test/user.test.js",
     "coveralls": "nyc report --reporter=text-lcov | coveralls"
   },
@@ -39,6 +40,7 @@
     "moment": "^2.24.0",
     "nodemon": "^2.0.1",
     "nyc": "^14.1.1",
+    "pg": "^7.14.0",
     "prettier": "^1.19.1"
   },
   "devDependencies": {

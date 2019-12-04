@@ -1,7 +1,7 @@
 /* eslint-disable node/no-unsupported-features/es-syntax */
 import chai from 'chai';
 import http from 'chai-http';
-import app from '../app';
+import app from '../../app';
 import gentoken from '../helpers/helperToken';
 
 chai.use(http);
