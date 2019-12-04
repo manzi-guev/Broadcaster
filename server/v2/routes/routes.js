@@ -8,6 +8,7 @@ import {
 import userController from '../controllers/userController';
 import redflagController from '../controllers/redflagController';
 import token from '../middleware/token.middleware';
+import owner from '../middleware/owner';
 
 const route = express();
 
@@ -16,4 +17,6 @@ route.post('/api/v2/auth/signin', signIn, userController.signin);
 route.post('/api/v2/red-flags', token, createRedflag, redflagController.create);
 route.get('/api/v2/red-flags', redflagController.viewredflags);
 route.get('/api/v2/red-flags/:id', redflagController.viewSpecificflag);
+route.delete('/api/v2/red-flags/:id', token, owner, redflagController.delete);
+
 export default route;

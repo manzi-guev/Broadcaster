@@ -64,5 +64,17 @@ class redflagController {
       error: 'Redflag not found'
     });
   }
+
+  static async delete(req, res) {
+    const id = parseInt(req.params.id, 10);
+    const viewspecific = await con.query(redflags.deleteredflag, [id]);
+    /* istanbul ignore else */
+    if (viewspecific.rowCount === 1) {
+      return res.status(200).json({
+        status: 200,
+        message: 'Redflag successfully deleted'
+      });
+    }
+  }
 }
 export default redflagController;

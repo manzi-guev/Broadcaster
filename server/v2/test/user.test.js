@@ -280,6 +280,18 @@ describe('RedFlag Tests', () => {
         done();
       });
   });
+  it('Not Owner message', done => {
+    const id = 1;
+    chai
+      .request(app)
+      .delete(`/api/v2/red-flags/${id}`)
+      .set('token', faketoken)
+      .end((err, res) => {
+        res.should.have.status(403);
+        res.body.should.have.property('error', 'You are not the owner');
+        done();
+      });
+  });
   it('Viewing specific redflag', done => {
     const id = 1;
     chai
@@ -288,6 +300,34 @@ describe('RedFlag Tests', () => {
       .send()
       .end((err, res) => {
         res.should.have.status(200);
+        done();
+      });
+  });
+  it('Deleting a redflag', done => {
+    const id = 1;
+    chai
+      .request(app)
+      .delete(`/api/v2/red-flags/${id}`)
+      .set('token', realtoken)
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.should.have.property(
+          'message',
+          'Redflag successfully deleted'
+        );
+        done();
+      });
+  });
+  it('Deleting a redflag that doesnt exist', done => {
+    const id = 3;
+    chai
+      .request(app)
+      .delete(`/api/v2/red-flags/${id}`)
+      .set('token', realtoken)
+      .send()
+      .end((err, res) => {
+        res.should.have.status(404);
+        res.body.should.have.property('error', 'Redflag not found');
         done();
       });
   });
