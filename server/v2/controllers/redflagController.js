@@ -32,5 +32,21 @@ class redflagController {
       });
     }
   }
+
+  static async viewredflags(req, res) {
+    const viewredflags = await con.query(redflags.findredflags);
+    /* istanbul ignore else */
+    if (viewredflags.rowCount >= 1) {
+      return res.status(200).json({
+        status: 200,
+        message: 'Success. List of all red-flags',
+        data: viewredflags.rows
+      });
+    }
+    return res.status(404).json({
+      status: 404,
+      error: 'Redflags not found'
+    });
+  }
 }
 export default redflagController;
