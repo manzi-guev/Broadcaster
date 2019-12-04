@@ -6,10 +6,11 @@
   "scripts": {
     "start": "npm run build && node build/app.js",
     "build": "babel ./server -d build",
-    "dev": "npm run createusertable && nodemon --exec babel-node ./server/app.js",
+    "dev": "npm run createusertable && npm run createredflag && nodemon --exec babel-node ./server/app.js",
     "cleantable":"node --require babel-polyfill --require babel-register ./server/v2/db/clean",
+    "createredflag": "node --require babel-polyfill --require babel-register ./server/v2/db/redflags",
     "createusertable": "node --require babel-polyfill --require babel-register ./server/v2/db/createuserTable",
-    "test": "NODE_ENV=TEST npm run cleantable && NODE_ENV=TEST npm run createusertable && NODE_ENV=TEST nyc --reporter=html --reporter=text --require babel-register --require babel-polyfill mocha --timeout 10000 --exit server/v2/test/user.test.js",
+    "test": "NODE_ENV=TEST npm run cleantable && NODE_ENV=TEST npm run createusertable && NODE_ENV=TEST npm run createredflag && NODE_ENV=TEST nyc --reporter=html --reporter=text --require babel-register --require babel-polyfill mocha --timeout 10000 --exit server/v2/test/user.test.js",
     "test2": "nyc --reporter=html --reporter=text mocha --require babel-register --exit server/v1/test/user.test.js",
     "coveralls": "nyc report --reporter=text-lcov | coveralls"
   },
