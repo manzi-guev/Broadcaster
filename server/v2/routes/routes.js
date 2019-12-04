@@ -15,4 +15,5 @@ route.post('/api/v2/auth/signup', signUp, userController.signup);
 route.post('/api/v2/auth/signin', signIn, userController.signin);
 route.post('/api/v2/red-flags', token, createRedflag, redflagController.create);
 route.get('/api/v2/red-flags', redflagController.viewredflags);
+route.get('/api/v2/red-flags/:id', redflagController.viewSpecificflag);
 export default route;
