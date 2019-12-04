@@ -115,6 +115,75 @@ describe('User tests', () => {
         done();
       });
   });
+  it('User must be able to login', done => {
+    chai
+      .request(app)
+      .post('/api/v2/auth/signin')
+      .send(login)
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.should.have.property('message', 'User successfully logged in');
+        done();
+      });
+  });
+  it('Another User must be able to login', done => {
+    chai
+      .request(app)
+      .post('/api/v2/auth/signin')
+      .send(login2)
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.should.have.property('message', 'User successfully logged in');
+        done();
+      });
+  });
+  it('When no email is passed', done => {
+    chai
+      .request(app)
+      .post('/api/v2/auth/signin')
+      .send(usercatch)
+      .end((err, res) => {
+        res.should.have.status(400);
+        res.body.should.have.property('error', '"email" is required');
+        done();
+      });
+  });
+  it('Fiels required', done => {
+    chai
+      .request(app)
+      .post('/api/v2/auth/signup')
+      .send(usercatch)
+      .end((err, res) => {
+        res.should.have.status(400);
+        res.body.should.have.property('error', '"firstname" is required');
+        done();
+      });
+  });
+  it('User doesnt exist', done => {
+    chai
+      .request(app)
+      .post('/api/v2/auth/signin')
+      .send(usercheck)
+      .end((err, res) => {
+        res.should.have.status(404);
+        res.body.should.have.property(
+          'error',
+          'User with provided email doesnt exist'
+        );
+        done();
+      });
+  });
+  it('Incorrect Password Provided', done => {
+    chai
+      .request(app)
+      .post('/api/v2/auth/signin')
+      .send(userpass)
+      .end((err, res) => {
+        res.should.have.status(401);
+        res.body.should.have.property('error', 'Password is incorrect');
+        done();
+      });
+  });
 });
 describe('User tests', () => {
   it('Not authorized', done => {
