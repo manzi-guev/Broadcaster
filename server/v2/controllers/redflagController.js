@@ -1,7 +1,7 @@
 /* eslint-disable consistent-return */
 /* eslint-disable node/no-unsupported-features/es-syntax */
 import moment from 'moment';
-import taketoken from '../helpers/token.verifier';
+import taketoken from '../helpers/verifyToken';
 import con from '../db/connection';
 import redflags from '../models/redflags';
 
@@ -92,6 +92,23 @@ class redflagController {
         data: {
           id: id,
           location: location
+        }
+      });
+    }
+  }
+
+  static async editComment(req, res) {
+    const { comment } = req.body;
+    const id = parseInt(req.params.id, 10);
+    const viewspecific = await con.query(redflags.updatecomment, [id, comment]);
+    /* istanbul ignore else */
+    if (viewspecific.rowCount === 1) {
+      return res.status(200).json({
+        status: 200,
+        message: 'Updated red-flag comment',
+        data: {
+          id: id,
+          comment: comment
         }
       });
     }

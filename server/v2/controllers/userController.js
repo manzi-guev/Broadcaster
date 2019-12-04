@@ -3,7 +3,7 @@
 import bcrypt from 'bcryptjs';
 import con from '../db/connection';
 import users from '../models/users';
-import tokengenerator from '../helpers/token.helper';
+import tokengenerator from '../helpers/helperToken';
 
 class userController {
   static async signup(req, res) {

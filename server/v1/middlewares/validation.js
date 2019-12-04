@@ -65,19 +65,11 @@ const createRedflag = (req, res, next) => {
       .strict()
       .trim()
       .required(),
-    type: Joi.string()
-      .strict()
-      .required()
-      .trim(),
     comment: Joi.string()
       .strict()
       .required()
       .trim(),
     location: Joi.string().required(),
-    status: Joi.string()
-      .strict()
-      .required()
-      .trim(),
     images: Joi.string()
       .trim()
       .strict()

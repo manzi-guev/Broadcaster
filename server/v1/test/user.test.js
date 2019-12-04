@@ -210,7 +210,7 @@ describe('App Test', () => {
   it('Route not found', done => {
     chai
       .request(app)
-      .get('/rtgh')
+      .get('/djdvbjkb')
       .send()
       .end((err, res) => {
         res.should.have.status(404);
