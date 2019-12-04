@@ -198,6 +198,17 @@ describe('User tests for Version 2', () => {
   });
 });
 describe('RedFlag Tests', () => {
+  it('Viewing redflag that doesnt exist', done => {
+    chai
+      .request(app)
+      .get('/api/v2/red-flags')
+      .send()
+      .end((err, res) => {
+        res.should.have.status(404);
+        res.body.should.have.property('error', 'Redflags not found');
+        done();
+      });
+  });
   it('Redflag created', done => {
     chai
       .request(app)
@@ -224,6 +235,20 @@ describe('RedFlag Tests', () => {
         res.body.should.have.property(
           'message',
           'Redflag successfully created'
+        );
+        done();
+      });
+  });
+  it('Viewing all redflags', done => {
+    chai
+      .request(app)
+      .get('/api/v2/red-flags')
+      .send(redflag)
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.should.have.property(
+          'message',
+          'Success. List of all red-flags'
         );
         done();
       });
