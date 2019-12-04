@@ -221,6 +221,19 @@ describe('RedFlag Tests', () => {
         done();
       });
   });
+  it('Updating the location of a redflag that doesnt exist', done => {
+    const id = 1;
+    chai
+      .request(app)
+      .patch(`/api/v2/red-flags/${id}/location`)
+      .set('token', realtoken)
+      .send()
+      .end((err, res) => {
+        res.should.have.status(404);
+        res.body.should.have.property('error', 'Redflag not found');
+        done();
+      });
+  });
   it('Redflag created', done => {
     chai
       .request(app)
@@ -300,6 +313,35 @@ describe('RedFlag Tests', () => {
       .send()
       .end((err, res) => {
         res.should.have.status(200);
+        done();
+      });
+  });
+  it('Updating the location of a redflag', done => {
+    const id = 1;
+    chai
+      .request(app)
+      .patch(`/api/v2/red-flags/${id}/location`)
+      .set('token', realtoken)
+      .send(updatelocation)
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.should.have.property('message', 'Updated red-flag location');
+        done();
+      });
+  });
+  it('Updating the location of a redflag with empty field', done => {
+    const id = 1;
+    chai
+      .request(app)
+      .patch(`/api/v2/red-flags/${id}/location`)
+      .set('token', realtoken)
+      .send(emptylocation)
+      .end((err, res) => {
+        res.should.have.status(400);
+        res.body.should.have.property(
+          'error',
+          '"location" is not allowed to be empty'
+        );
         done();
       });
   });

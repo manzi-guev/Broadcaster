@@ -76,5 +76,25 @@ class redflagController {
       });
     }
   }
+
+  static async editLocation(req, res) {
+    const { location } = req.body;
+    const id = parseInt(req.params.id, 10);
+    const viewspecific = await con.query(redflags.updatelocation, [
+      id,
+      location
+    ]);
+    /* istanbul ignore else */
+    if (viewspecific.rowCount === 1) {
+      return res.status(200).json({
+        status: 200,
+        message: 'Updated red-flag location',
+        data: {
+          id: id,
+          location: location
+        }
+      });
+    }
+  }
 }
 export default redflagController;
