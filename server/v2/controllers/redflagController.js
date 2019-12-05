@@ -1,5 +1,5 @@
-/* eslint-disable consistent-return */
 /* eslint-disable node/no-unsupported-features/es-syntax */
+/* eslint-disable consistent-return */
 import moment from 'moment';
 import taketoken from '../helpers/verifyToken';
 import con from '../db/connection';

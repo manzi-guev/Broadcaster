@@ -1,6 +1,3 @@
-/* eslint-disable consistent-return */
-/* eslint-disable no-else-return */
-/* eslint-disable lines-between-class-members */
 /* eslint-disable node/no-unsupported-features/es-syntax */
 import bcrypt from 'bcryptjs';
 import con from '../db/connection';
@@ -29,11 +26,11 @@ class userController {
       role
     ]);
     const finduser = await con.query(users.findUser, [email]);
-    const real = finduser.rows[0].role;
+    const rolechecker = finduser.rows[0].role;
     if (newUser.rowCount === 1) {
       return res.status(201).json({
         status: 201,
-        token: tokengenerator(email, real),
+        token: tokengenerator(email, rolechecker),
         message: 'User succesfully created',
         data: {
           firstname: finduser.rows[0].firstname,
@@ -44,13 +41,13 @@ class userController {
           role: finduser.rows[0].role
         }
       });
-    } else {
-      res.status(409).json({
-        status: 409,
-        error: 'User already exists'
-      });
     }
+    return res.status(409).json({
+      status: 409,
+      error: 'User already exists'
+    });
   }
+
   static async signin(req, res) {
     const { email, password } = req.body;
     const finduser = await con.query(users.findUser, [email]);
@@ -59,22 +56,21 @@ class userController {
         status: 404,
         error: 'User with provided email doesnt exist'
       });
-    } else {
-      if (
-        bcrypt.compareSync(password, finduser.rows[0].password) ||
-        password === finduser.rows[0].password
-      ) {
-        return res.status(200).json({
-          status: 200,
-          token: tokengenerator(email),
-          message: 'User successfully logged in'
-        });
-      }
-      return res.status(401).json({
-        status: 401,
-        error: 'Password is incorrect'
+    }
+    if (
+      bcrypt.compareSync(password, finduser.rows[0].password) ||
+      password === finduser.rows[0].password
+    ) {
+      return res.status(200).json({
+        status: 200,
+        token: tokengenerator(email),
+        message: 'User successfully logged in'
       });
     }
+    return res.status(401).json({
+      status: 401,
+      error: 'Password is incorrect'
+    });
   }
 }
 

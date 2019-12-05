@@ -1,3 +1,4 @@
+/* eslint-disable node/no-unpublished-import */
 /* eslint-disable node/no-unsupported-features/es-syntax */
 import chai from 'chai';
 import http from 'chai-http';

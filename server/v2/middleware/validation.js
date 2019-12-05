@@ -1,4 +1,3 @@
-/* eslint-disable consistent-return */
 /* eslint-disable node/no-unsupported-features/es-syntax */
 import Joi from '@hapi/joi';
 
@@ -40,7 +39,7 @@ const signUp = (req, res, next) => {
     });
   }
   req.user = schema;
-  next();
+  return next();
 };
 const signIn = (req, res, next) => {
   const schema = {
@@ -59,7 +58,7 @@ const signIn = (req, res, next) => {
       error: `${output.error.details[0].message}`
     });
   }
-  next();
+  return next();
 };
 const createRedflag = (req, res, next) => {
   const schema = {
@@ -88,7 +87,7 @@ const createRedflag = (req, res, next) => {
       error: `${output.error.details[0].message}`
     });
   }
-  next();
+  return next();
 };
 const editcomment = (req, res, next) => {
   const schema = {
@@ -103,7 +102,7 @@ const editcomment = (req, res, next) => {
       error: `${output.error.details[0].message}`
     });
   }
-  next();
+  return next();
 };
 const editlocation = (req, res, next) => {
   const schema = {
@@ -118,7 +117,7 @@ const editlocation = (req, res, next) => {
       error: `${output.error.details[0].message}`
     });
   }
-  next();
+  return next();
 };
 const editStatus = (req, res, next) => {
   const schema = {
@@ -133,6 +132,6 @@ const editStatus = (req, res, next) => {
       error: `${output.error.details[0].message}`
     });
   }
-  next();
+  return next();
 };
 export { signIn, signUp, createRedflag, editcomment, editlocation, editStatus };

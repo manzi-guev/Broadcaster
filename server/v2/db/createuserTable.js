@@ -1,6 +1,5 @@
-/* eslint-disable import/no-useless-path-segments */
 /* eslint-disable node/no-unsupported-features/es-syntax */
-import con from '../db/connection';
+import con from './connection';
 import users from '../models/users';
 
 const create = async () => {

@@ -1,5 +1,4 @@
 /* eslint-disable no-unused-vars */
-/* eslint-disable consistent-return */
 /* eslint-disable node/no-unsupported-features/es-syntax */
 import jwt from 'jsonwebtoken';
 import con from '../db/connection';
@@ -29,5 +28,6 @@ const checkToken = async (req, res, next) => {
       error: error.message
     });
   }
+  return null;
 };
 export default checkToken;

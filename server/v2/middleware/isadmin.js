@@ -1,4 +1,3 @@
-/* eslint-disable consistent-return */
 /* eslint-disable node/no-unsupported-features/es-syntax */
 import jwt from 'jsonwebtoken';
 import con from '../db/connection';
@@ -22,6 +21,6 @@ const access = async (req, res, next) => {
       error: 'You are not the Admin'
     });
   }
-  next();
+  return next();
 };
 export default access;
