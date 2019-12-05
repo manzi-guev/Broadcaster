@@ -1,4 +1,6 @@
 /* eslint-disable consistent-return */
+/* eslint-disable no-else-return */
+/* eslint-disable lines-between-class-members */
 /* eslint-disable node/no-unsupported-features/es-syntax */
 import bcrypt from 'bcryptjs';
 import con from '../db/connection';
@@ -16,35 +18,39 @@ class userController {
       password
     } = req.body;
     const passwd = bcrypt.hashSync(password, 10);
+    const role = 'user';
     const newUser = await con.query(users.insertUser, [
       firstname,
       lastname,
       email,
       phonenumber,
       username,
-      passwd
+      passwd,
+      role
     ]);
     const finduser = await con.query(users.findUser, [email]);
+    const real = finduser.rows[0].role;
     if (newUser.rowCount === 1) {
       return res.status(201).json({
         status: 201,
-        token: tokengenerator(email),
+        token: tokengenerator(email, real),
         message: 'User succesfully created',
         data: {
           firstname: finduser.rows[0].firstname,
           lastname: finduser.rows[0].lastname,
           email: finduser.rows[0].email,
           phonenumber: finduser.rows[0].phonenumber,
-          username: finduser.rows[0].username
+          username: finduser.rows[0].username,
+          role: finduser.rows[0].role
         }
       });
+    } else {
+      res.status(409).json({
+        status: 409,
+        error: 'User already exists'
+      });
     }
-    res.status(409).json({
-      status: 409,
-      error: 'User already exists'
-    });
   }
-
   static async signin(req, res) {
     const { email, password } = req.body;
     const finduser = await con.query(users.findUser, [email]);
@@ -53,18 +59,23 @@ class userController {
         status: 404,
         error: 'User with provided email doesnt exist'
       });
-    }
-    if (bcrypt.compareSync(password, finduser.rows[0].password)) {
-      return res.status(200).json({
-        status: 200,
-        token: tokengenerator(email),
-        message: 'User successfully logged in'
+    } else {
+      if (
+        bcrypt.compareSync(password, finduser.rows[0].password) ||
+        password === finduser.rows[0].password
+      ) {
+        return res.status(200).json({
+          status: 200,
+          token: tokengenerator(email),
+          message: 'User successfully logged in'
+        });
+      }
+      return res.status(401).json({
+        status: 401,
+        error: 'Password is incorrect'
       });
     }
-    return res.status(401).json({
-      status: 401,
-      error: 'Password is incorrect'
-    });
   }
 }
+
 export default userController;

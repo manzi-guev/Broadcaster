@@ -5,12 +5,14 @@ import {
   signIn,
   createRedflag,
   editlocation,
-  editcomment
+  editcomment,
+  editStatus
 } from '../middleware/validation';
 import userController from '../controllers/userController';
 import redflagController from '../controllers/redflagController';
 import token from '../middleware/token';
 import owner from '../middleware/owner';
+import isAdmin from '../middleware/isadmin';
 
 const route = express();
 
@@ -33,6 +35,12 @@ route.patch(
   owner,
   editcomment,
   redflagController.editComment
+);
+route.patch(
+  '/api/v2/red-flags/:id/status',
+  isAdmin,
+  editStatus,
+  redflagController.editStatus
 );
 
 export default route;

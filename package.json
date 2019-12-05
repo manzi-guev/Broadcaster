@@ -4,7 +4,7 @@
   "description": " What are we building?",
   "main": "index.js",
   "scripts": {
-    "start": "npm run build && node build/app.js",
+    "start": "npm run createusertable && npm run createredflag && npm run build && node build/app.js",
     "build": "babel ./server -d build",
     "dev": "npm run createusertable && npm run createredflag && nodemon --exec babel-node ./server/app.js",
     "dev2": "nodemon --exec babel-node ./server/app.js",

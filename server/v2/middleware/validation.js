@@ -5,9 +5,11 @@ import Joi from '@hapi/joi';
 const signUp = (req, res, next) => {
   const schema = {
     firstname: Joi.string()
+      .regex(/^[a-zA-Z]{3,20}/)
       .strict()
       .trim()
-      .required(),
+      .required()
+      .error(new Error('First name must be letters only')),
     lastname: Joi.string()
       .strict()
       .trim()
@@ -34,7 +36,7 @@ const signUp = (req, res, next) => {
   if (output.error != null) {
     return res.status(400).json({
       status: 400,
-      error: `${output.error.details[0].message}`
+      error: `${output.error.message}`
     });
   }
   req.user = schema;
@@ -118,4 +120,19 @@ const editlocation = (req, res, next) => {
   }
   next();
 };
-export { signIn, signUp, createRedflag, editcomment, editlocation };
+const editStatus = (req, res, next) => {
+  const schema = {
+    status: Joi.string()
+      .trim()
+      .required()
+  };
+  const output = Joi.validate(req.body, schema);
+  if (output.error != null) {
+    return res.status(400).json({
+      status: 400,
+      error: `${output.error.details[0].message}`
+    });
+  }
+  next();
+};
+export { signIn, signUp, createRedflag, editcomment, editlocation, editStatus };

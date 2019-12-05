@@ -27,6 +27,7 @@ const findspecific = `select * from redflags where id = ($1)`;
 const deleteredflag = `delete from redflags where id = ($1)`;
 const updatecomment = `UPDATE redflags SET comment = $2 where id = $1`;
 const updatelocation = `UPDATE redflags SET location = $2 where id = $1`;
+const updatestatus = `UPDATE redflags SET status = $2 where id = $1`;
 const findowner = `select * from redflags where createdBy = ($1)`;
 export default {
   createRedflag,
@@ -36,5 +37,6 @@ export default {
   deleteredflag,
   findowner,
   updatecomment,
-  updatelocation
+  updatelocation,
+  updatestatus
 };

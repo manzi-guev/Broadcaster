@@ -113,5 +113,22 @@ class redflagController {
       });
     }
   }
+
+  static async editStatus(req, res) {
+    const { status } = req.body;
+    const id = parseInt(req.params.id, 10);
+    const viewspecific = await con.query(redflags.updatestatus, [id, status]);
+    /* istanbul ignore else */
+    if (viewspecific.rowCount === 1) {
+      return res.status(200).json({
+        status: 200,
+        message: 'Changed red-flag status',
+        data: {
+          id: id,
+          status: status
+        }
+      });
+    }
+  }
 }
 export default redflagController;
