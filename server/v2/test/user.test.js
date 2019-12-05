@@ -529,43 +529,10 @@ describe('App Test', () => {
         done();
       });
   });
-  it('Route not found for get', done => {
+  it('Route errors', done => {
     chai
       .request(app)
-      .get('/djdvbjkb')
-      .send()
-      .end((err, res) => {
-        res.should.have.status(404);
-        res.body.should.have.property('error', 'Route not found');
-        done();
-      });
-  });
-  it('Route not found for post', done => {
-    chai
-      .request(app)
-      .post('/djdvbjkb')
-      .send()
-      .end((err, res) => {
-        res.should.have.status(404);
-        res.body.should.have.property('error', 'Route not found');
-        done();
-      });
-  });
-  it('Route not found for delete', done => {
-    chai
-      .request(app)
-      .delete('/djdvbjkb')
-      .send()
-      .end((err, res) => {
-        res.should.have.status(404);
-        res.body.should.have.property('error', 'Route not found');
-        done();
-      });
-  });
-  it('Route not found for patch', done => {
-    chai
-      .request(app)
-      .patch('/djdvbjkb')
+      .get('/feuf')
       .send()
       .end((err, res) => {
         res.should.have.status(404);
