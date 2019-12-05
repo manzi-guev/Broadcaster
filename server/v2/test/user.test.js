@@ -11,8 +11,9 @@ dotenv.config();
 chai.use(http);
 chai.should();
 
-const realtoken = gentoken('abdoul@gmail.com');
-const faketoken = gentoken('manzi@gmail.com');
+const realtoken = gentoken('abdoul@gmail.com', 'user');
+const faketoken = gentoken('manzi@gmail.com', 'user');
+const admin = gentoken('aisha@gmail.com', 'admin');
 
 const user = {
   firstname: 'Nuru',
@@ -55,6 +56,10 @@ const login2 = {
   email: 'manzi@gmail.com',
   password: 'nurureal'
 };
+const adminlogin = {
+  email: 'aisha@gmail.com',
+  password: 'hello1234'
+};
 const usercatch = {
   password: 'nurureal'
 };
@@ -69,6 +74,12 @@ const userpass = {
 const updatecomment = {
   comment: 'Please do something about this'
 };
+const updatestatus = {
+  status: 'Resolved'
+};
+const emptystatus = {
+  status: ''
+};
 const emptycomment = {
   comment: ''
 };
@@ -79,7 +90,7 @@ const emptylocation = {
   location: ''
 };
 const nouser = {};
-describe('User tests for Version 2', () => {
+describe('User tests for Version 1', () => {
   it('Not authorized', done => {
     chai
       .request(app)
@@ -87,7 +98,6 @@ describe('User tests for Version 2', () => {
       .set('token', realtoken)
       .send(nouser)
       .end((err, res) => {
-        console.log(process.env.NODE_ENV);
         res.should.have.status(401);
         res.body.should.have.property('error', 'Not authorized');
         done();
@@ -150,6 +160,17 @@ describe('User tests for Version 2', () => {
         done();
       });
   });
+  it('Admin must be able to login', done => {
+    chai
+      .request(app)
+      .post('/api/v2/auth/signin')
+      .send(adminlogin)
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.should.have.property('message', 'User successfully logged in');
+        done();
+      });
+  });
   it('When no email is passed', done => {
     chai
       .request(app)
@@ -168,7 +189,10 @@ describe('User tests for Version 2', () => {
       .send(usercatch)
       .end((err, res) => {
         res.should.have.status(400);
-        res.body.should.have.property('error', '"firstname" is required');
+        res.body.should.have.property(
+          'error',
+          'First name must be letters only'
+        );
         done();
       });
   });
@@ -254,6 +278,10 @@ describe('RedFlag Tests', () => {
       .post('/api/v2/red-flags')
       .set('token', realtoken)
       .send(redflag)
+      //   .attach(
+      //     'images',
+      //     `${__dirname}../../../redflags/2019_10_22_122129IMG_0395.JPG`
+      //   )
       .end((err, res) => {
         res.should.have.status(201);
         res.body.should.have.property(
@@ -269,6 +297,10 @@ describe('RedFlag Tests', () => {
       .post('/api/v2/red-flags')
       .set('token', realtoken)
       .send(redflag)
+      //   .attach(
+      //     'images',
+      //     `${__dirname}../../../redflags/2019_10_22_122129IMG_0395.JPG`
+      //   )
       .end((err, res) => {
         res.should.have.status(201);
         res.body.should.have.property(
@@ -319,6 +351,18 @@ describe('RedFlag Tests', () => {
         done();
       });
   });
+  it('Not Admin message', done => {
+    const id = 1;
+    chai
+      .request(app)
+      .patch(`/api/v2/red-flags/${id}/status`)
+      .set('token', faketoken)
+      .end((err, res) => {
+        res.should.have.status(403);
+        res.body.should.have.property('error', 'You are not the Admin');
+        done();
+      });
+  });
   it('Viewing specific redflag', done => {
     const id = 1;
     chai
@@ -356,6 +400,35 @@ describe('RedFlag Tests', () => {
       .end((err, res) => {
         res.should.have.status(200);
         res.body.should.have.property('message', 'Updated red-flag comment');
+        done();
+      });
+  });
+  it('Updating the status of a redflag with empty field', done => {
+    const id = 2;
+    chai
+      .request(app)
+      .patch(`/api/v2/red-flags/${id}/status`)
+      .set('token', admin)
+      .send(emptystatus)
+      .end((err, res) => {
+        res.should.have.status(400);
+        res.body.should.have.property(
+          'error',
+          '"status" is not allowed to be empty'
+        );
+        done();
+      });
+  });
+  it('Updating the status of a redflag', done => {
+    const id = 2;
+    chai
+      .request(app)
+      .patch(`/api/v2/red-flags/${id}/status`)
+      .set('token', admin)
+      .send(updatestatus)
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.should.have.property('message', 'Changed red-flag status');
         done();
       });
   });
@@ -422,6 +495,19 @@ describe('RedFlag Tests', () => {
       .request(app)
       .patch(`/api/v2/red-flags/${id}/comment`)
       .set('token', realtoken)
+      .send()
+      .end((err, res) => {
+        res.should.have.status(404);
+        res.body.should.have.property('error', 'Redflag not found');
+        done();
+      });
+  });
+  it('Updating the status of a redflag that doesnt exist', done => {
+    const id = 6;
+    chai
+      .request(app)
+      .patch(`/api/v2/red-flags/${id}/status`)
+      .set('token', admin)
       .send()
       .end((err, res) => {
         res.should.have.status(404);
@@ -499,18 +585,18 @@ describe('Token Test', () => {
         done();
       });
   });
-  //   it('Jwt malformed token', done => {
-  //     chai
-  //       .request(app)
-  //       .post('/api/v2/red-flags')
-  //       .set('token', 'hello')
-  //       .send()
-  //       .end((err, res) => {
-  //         res.should.have.status(400);
-  //         res.body.should.have.property('error');
-  //         done();
-  //       });
-  //   });
+  it('Jwt malformed token', done => {
+    chai
+      .request(app)
+      .post('/api/v2/red-flags')
+      .set('token', 'hello')
+      .send()
+      .end((err, res) => {
+        res.should.have.status(400);
+        res.body.should.have.property('error');
+        done();
+      });
+  });
   it('Invalid Signature', done => {
     chai
       .request(app)
@@ -519,12 +605,12 @@ describe('Token Test', () => {
       .send()
       .end((err, res) => {
         res.should.have.status(400);
-        res.body.should.have.property('error');
+        res.body.should.have.property('error', 'invalid signature');
         done();
       });
   });
 });
-describe('User tests for Version 1', () => {
+describe('User tests for version 2', () => {
   it('Not authorized', done => {
     chai
       .request(app)
@@ -699,6 +785,10 @@ describe('RedFlag Tests', () => {
       .post('/api/v1/red-flags')
       .set('token', realtoken)
       .send(redflag)
+      //   .attach(
+      //     'images',
+      //     `${__dirname}../../../redflags/2019_10_22_122129IMG_0395.JPG`
+      //   )
       .end((err, res) => {
         res.should.have.status(201);
         res.body.should.have.property(

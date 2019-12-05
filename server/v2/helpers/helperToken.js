@@ -3,9 +3,10 @@ import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 
 dotenv.config();
-const generateToken = email =>
+const generateToken = (email, role) =>
   jwt.sign(
     {
+      role: role,
       email: email
     },
     process.env.KEY
