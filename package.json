@@ -14,8 +14,7 @@
     "createredflag": "node --require babel-polyfill --require babel-register ./server/v2/db/redflags",
     "createusertable": "node --require babel-polyfill --require babel-register ./server/v2/db/createuserTable",
     "test": "NODE_ENV=TEST npm run cleantable && NODE_ENV=TEST npm run createusertable && NODE_ENV=TEST npm run createredflag && NODE_ENV=TEST nyc --reporter=html --reporter=text --require babel-register --require babel-polyfill mocha --timeout 10000 --exit server/v2/test/user.test.js",
-    "coveralls": "nyc report --reporter=text-lcov | coveralls",
-    "lint": "eslint **/*.js --ignore-pattern node_modules/"
+    "coveralls": "nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
     "type": "git",
