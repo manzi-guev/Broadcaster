@@ -8,11 +8,11 @@ let pool;
 /* istanbul ignore else */
 if (process.env.NODE_ENV === 'TEST') {
   pool = new Pool({
-    connectionString: process.env.DATABASE_URL
+    connectionString: process.env.DB_TEST
   });
 } else {
   pool = new Pool({
-    connectionString: process.env.DB
+    connectionString: process.env.DATABASE_URL
   });
 }
 
