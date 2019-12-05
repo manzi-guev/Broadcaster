@@ -7,7 +7,7 @@
   "description": " What are we building?",
   "main": "index.js",
   "scripts": {
-    "start": "npm run createusertable && npm run createredflag && npm run build && node build/app.js",
+    "start": "npm run build && npm run createusertable && npm run createredflag  && node --require babel-polyfill build/app.js",
     "build": "babel ./server -d build && node --require babel-polyfill ./build/v2/db/createuserTable.js && node --require babel-polyfill ./build/v2/db/redflags.js ",
     "dev": "npm run createusertable && npm run createredflag && nodemon --exec babel-node ./server/app.js",
     "cleantable": "node --require babel-polyfill --require babel-register ./server/v2/db/clean",
