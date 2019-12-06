@@ -14,7 +14,7 @@ chai.should();
 
 const realtoken = gentoken('abdoul@gmail.com', 'user');
 const faketoken = gentoken('manzi@gmail.com', 'user');
-const admin = gentoken('aisha@gmail.com', 'admin');
+const admin = gentoken('manziguevara@gmail.com', 'admin');
 
 const user = {
   firstname: 'Nuru',
@@ -58,8 +58,8 @@ const login2 = {
   password: 'nurureal'
 };
 const adminlogin = {
-  email: 'aisha@gmail.com',
-  password: 'hello1234'
+  email: 'manziguevara@gmail.com',
+  password: 'gege1234'
 };
 const usercatch = {
   password: 'nurureal'
@@ -91,7 +91,7 @@ const emptylocation = {
   location: ''
 };
 const nouser = {};
-describe('User tests for Version 1', () => {
+describe('User tests for Version 2', () => {
   it('Not authorized', done => {
     chai
       .request(app)
@@ -279,10 +279,6 @@ describe('RedFlag Tests', () => {
       .post('/api/v2/red-flags')
       .set('token', realtoken)
       .send(redflag)
-      //   .attach(
-      //     'images',
-      //     `${__dirname}../../../redflags/2019_10_22_122129IMG_0395.JPG`
-      //   )
       .end((err, res) => {
         res.should.have.status(201);
         res.body.should.have.property(
@@ -298,10 +294,6 @@ describe('RedFlag Tests', () => {
       .post('/api/v2/red-flags')
       .set('token', realtoken)
       .send(redflag)
-      //   .attach(
-      //     'images',
-      //     `${__dirname}../../../redflags/2019_10_22_122129IMG_0395.JPG`
-      //   )
       .end((err, res) => {
         res.should.have.status(201);
         res.body.should.have.property(
@@ -565,6 +557,19 @@ describe('Token Test', () => {
         done();
       });
   });
+  it('Jwt malformed token', done => {
+    const id = 2;
+    chai
+      .request(app)
+      .patch(`/api/v2/red-flags/${id}/status`)
+      .set('token', 'hello')
+      .send()
+      .end((err, res) => {
+        res.should.have.status(400);
+        res.body.should.have.property('error');
+        done();
+      });
+  });
   it('Invalid Signature', done => {
     chai
       .request(app)
@@ -578,7 +583,7 @@ describe('Token Test', () => {
       });
   });
 });
-describe('User tests for version 2', () => {
+describe('User tests for version 1', () => {
   it('Not authorized', done => {
     chai
       .request(app)
