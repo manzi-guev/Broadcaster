@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Edit Red-Flag</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../CSS/edit.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/bebas" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <ul>
+        <li><a class="active" href="#">Broadcaster</a></li>
+        <li><a href="#">Edit Red-Flag/Intervention</a></li>
+        <li class="float" id="modalBtn1"><a href="../HTML/userpage.html">Home</a></li>
+    </ul>
+    <br>
+    <br>
+    <h1 align="center">Edit Red-Flag</h1>
+    <br>
+    <div class="container">
+        <form action="../HTML/redflags.html">
+            <div class="row">
+                <div class="col-25">
+                    <label for="fname">Title</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" value="Corruption">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="lname">Type</label>
+                </div>
+                <div class="col-75">
+                    <select id="country" name="country">
+                        <option value="australia">Red-Flag</option>
+                        <option value="canada">Intervention</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="lname">Comment</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" value="I saw corruption">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="country">Location</label>
+                </div>
+                <div class="col-75">
+                    <select id="country" name="country">
+                        <option value="">Select Location..</option>
+                        <option value="">Kigali</option>
+                        <option value="">Gisenyi</option>
+                        <option value="">Gikondo</option>
+                        <option value="">Huye</option>
+                        <option value="">Musanze</option>
+                        <option value="">Nyarugenge</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="lname">Image</label>
+                </div>
+                <div class="col-75">
+                    <input type="file" id="lname" name="lastname" accept="image/*">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="lname">Video</label>
+                </div>
+                <div class="col-75">
+                    <input type="file" id="lname" name="lastname" accept="video/*">
+                </div>
+            </div>
+            <br>
+            <div class="row" align="center">
+                <input type="submit" value="Submit">
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>
