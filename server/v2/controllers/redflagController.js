@@ -1,6 +1,7 @@
 /* eslint-disable node/no-unsupported-features/es-syntax */
 /* eslint-disable consistent-return */
 import moment from 'moment';
+import nodemailer from 'nodemailer';
 import taketoken from '../helpers/verifyToken';
 import con from '../db/connection';
 import redflags from '../models/redflags';
@@ -120,6 +121,22 @@ class redflagController {
     const viewspecific = await con.query(redflags.updatestatus, [id, status]);
     /* istanbul ignore else */
     if (viewspecific.rowCount === 1) {
+      process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+      const transporter = await nodemailer.createTransport({
+        service: 'Gmail',
+        auth: {
+          user: 'manziguevara@gmail.com',
+          pass: 'kutaye80'
+        }
+      });
+      console.log('created');
+      transporter.sendMail({
+        from: 'manziguevara@gmail.com',
+        to: 'manziguevara@gmail.com',
+        subject: 'kigali.noreply@broadcaster.com',
+        text:
+          'Dear Manzi Guevara, this is to let you know that the status of your redflag has been changed. Thank you for using Broadcaster!'
+      });
       return res.status(200).json({
         status: 200,
         message: 'Changed red-flag status',

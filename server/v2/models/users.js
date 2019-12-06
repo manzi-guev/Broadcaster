@@ -25,7 +25,7 @@ const insertAdmin = `INSERT INTO users (
     username,
     password,
     role
-    ) VALUES ('Uwineza','Aisha','aisha@gmail.com','+250785802458','aichu','hello1234','admin') ON CONFLICT DO NOTHING returning *`;
+    ) VALUES ('Manzi','Guevara','manziguevara@gmail.com','+250785802789','gege','gege1234','admin') ON CONFLICT DO NOTHING returning *`;
 const findUser = `select * from users where email = ($1)`;
 const findAdmin = `select * from users where role = ($1)`;
 

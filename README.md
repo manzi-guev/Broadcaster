@@ -40,7 +40,7 @@ Everyone in the world. Especially in Africa.
 | /api/v1/red-flags/:id/location |  Patch  | users can edit the location of a redflag |
 
 # API Documentation
-[https://documenter.getpostman.com/view/8149811/SW7f16Rr?version=latest](Documentation link)
+[Documentation link](https://documenter.getpostman.com/view/8149811/SW7f16Rr?version=latest)
 
 # User Interface
 
